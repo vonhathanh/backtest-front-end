@@ -1,12 +1,12 @@
-## Install
+# Install
 
 `npm create vite@latest my-react-app -- --template react-ts`
 `npm install`
 
-## Run
+# Run
 
-# Development
+## Development
 
 `npm run dev`
 
-# Production
+## Production
