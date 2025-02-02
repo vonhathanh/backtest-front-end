@@ -1,6 +1,6 @@
 # Install
 
-`npm create vite@latest my-react-app -- --template react-ts`
+`npm create vite@latest`
 `npm install`
 
 # Run
