@@ -1,7 +1,15 @@
+import { Routes } from "react-router"
+import { Route } from "react-router-dom"
+import Config from "./pages/Config"
+import Backtest from "./pages/Backtest";
+
 function App() {
   return (
     <>
-      <h1>Strategy Configuration</h1>
+      <Routes>
+        <Route path="/" element={<Config />} />
+        <Route path="/backtest" element={<Backtest/>} />
+      </Routes>
     </>
   )
 }
