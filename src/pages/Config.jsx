@@ -25,8 +25,10 @@ export default function Config() {
 
         <section id="time-and-balance" className="config-group">
           <DateTimeInput label="Start time" isEnable={false}/>
-          <Input label="Initial Balance" isEnable={true}/>
+          <DateTimeInput label="End time" isEnable={false}/>
         </section>
+
+        <Input label="Initial Balance" isEnable={true}/>
 
         <section id="manual-mode">
           <span>Manual mode</span>
