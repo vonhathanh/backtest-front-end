@@ -49,11 +49,13 @@ input[type="date"] {
 
 #manual-mode {
     display: flex;
+    justify-content: space-between;
     box-sizing: border-box;
 }
 
 /* Toogle switch's container*/
 .toogle-switch {
+    /* relative position so slider can use absolute position */
     position: relative;
     display: inline-block;
     width: 50px;
@@ -71,6 +73,8 @@ input[type="date"] {
 .slider {
     position: absolute;
     cursor: pointer;
+    top: 0px;
+    left: 0px;
     background-color: #ccc;
     border-radius: 24px;
     width: 100%;
