@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import "./Config.css"
+import FileSelection from "../components/FileSelection";
 
 
 export default function Config() {
@@ -10,11 +11,10 @@ export default function Config() {
     }
     
     return (
-      <>
-        <h3>Trading Strategy Configuration</h3>
+      <main>
+        <h2>Trading Strategy Configuration</h2>
 
-        <section id="data-selection">
-        </section>
+        <FileSelection />
 
         <section id="symbol-and-timeframe" className="config-group">
           <section className="config-value"></section>
@@ -30,6 +30,6 @@ export default function Config() {
         <section id="strategy-selection"></section>
 
         <button onClick={handleRedirect}>Start testing</button>
-      </>
+      </main>
     )
 }
