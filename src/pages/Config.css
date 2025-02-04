@@ -16,6 +16,16 @@ section {
     justify-content: space-between;
 }
 
+#start-btn {
+    margin-top: 10px;
+    background-color: black;
+    font-size: 0.9rem;
+    color: white;
+    width: 100%;
+    border-radius: 6px;
+    padding: 5px;
+}
+
 #upload-btn {
     background-color: white;
     border: 1px solid #ccc;
@@ -37,7 +47,7 @@ section {
     margin-top: 20px;
 }
 
-input {
+input[type=text], input[type=date] {
     margin-top: 7px;
     min-width: 250px;
     padding: 3px;
@@ -102,4 +112,22 @@ input[type="date"] {
 
 .toogle-switch input:checked + .slider::before {
     transform: translate(23px);
+}
+
+#checkboxes-container {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+div.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+input[type=checkbox] {
+    margin: 8px
 }
