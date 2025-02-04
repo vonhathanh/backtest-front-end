@@ -2,19 +2,14 @@ import { useNavigate } from "react-router";
 import "./Config.css"
 import FileSelection from "../components/FileSelection";
 import Input from "../components/Input";
-import DateTimeInput from "../components/DateTimeInput"
-import ToogleSwitch from "../components/ToogleSwitch";
-import CheckBox from "../components/CheckBox";
+import DefaultConfig from "../components/DefaultConfig";
+import TimeConfig from "../components/TimeConfig";
+import ManualMode from "../components/ManualMode";
+import StrategySelection from "../components/StrategySelection";
 
 export default function Config() {
 
   const strategies = ["Baseline", "Grid"]
-
-  const checkboxes = strategies.map(strategyName => {
-    return (
-      <CheckBox key={strategyName} name={strategyName} />
-    )
-  })
 
   const navigate = useNavigate();
 
@@ -24,33 +19,19 @@ export default function Config() {
 
   return (
     <main>
-      <h2>Trading Strategy Configuration</h2>
+      <h1>Trading Strategy Configuration</h1>
 
       <FileSelection />
 
-      <section id="symbol-and-timeframe" className="config-group">
-        <Input label="Symbol" isEnable={false} />
-        <Input label="Timeframe" isEnable={false} />
-      </section>
+      <DefaultConfig />
 
-      <section id="time-and-balance" className="config-group">
-        <DateTimeInput label="Start time" isEnable={false} />
-        <DateTimeInput label="End time" isEnable={false} />
-      </section>
+      <TimeConfig />
 
       <Input label="Initial Balance" isEnable={true} />
 
-      <section id="manual-mode">
-        <span>Manual mode</span>
-        <ToogleSwitch />
-      </section>
+      <ManualMode />
 
-      <section id="strategy-selection">
-        <label htmlFor="strategies">Strategy</label>
-        <section id="checkboxes-container">
-          {checkboxes}
-        </section>
-      </section>
+      <StrategySelection strategies={strategies} />
 
       <button id="start-btn" onClick={handleRedirect}>Start testing</button>
       
