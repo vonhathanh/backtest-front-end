@@ -9,6 +9,7 @@ main {
 
 section {
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 #data-selection {
@@ -17,12 +18,13 @@ section {
 }
 
 #start-btn {
-    margin-top: 10px;
+    margin-top: 15px;
     background-color: black;
     font-size: 0.9rem;
     color: white;
     width: 100%;
-    border-radius: 6px;
+    border-radius: 4px;
+    border: none;
     padding: 5px;
 }
 
@@ -30,7 +32,8 @@ section {
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 7px;
+    padding: 5px;
+    font-size: 0.9rem;
 }
 
 #upload-icon {
@@ -44,13 +47,14 @@ section {
 .config-group {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 input[type=text], input[type=date] {
     margin-top: 7px;
     min-width: 250px;
-    padding: 3px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 input[type="date"] {
@@ -61,6 +65,7 @@ input[type="date"] {
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
+    margin-top: 20px;
 }
 
 /* Toogle switch's container*/
@@ -115,7 +120,6 @@ input[type="date"] {
 }
 
 #checkboxes-container {
-    margin-top: 10px;
     display: grid;
     grid-template-columns: auto auto auto;
     justify-content: space-between;
@@ -123,9 +127,13 @@ input[type="date"] {
     border-radius: 5px;
 }
 
-div.checkbox {
+section.checkbox {
     display: flex;
     align-items: center;
+}
+
+section.checkbox > label {
+    margin-right: 10px;
 }
 
 input[type=checkbox] {

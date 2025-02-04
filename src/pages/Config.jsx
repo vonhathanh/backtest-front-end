@@ -47,9 +47,9 @@ export default function Config() {
 
       <section id="strategy-selection">
         <label htmlFor="strategies">Strategy</label>
-        <div id="checkboxes-container">
+        <section id="checkboxes-container">
           {checkboxes}
-        </div>
+        </section>
       </section>
 
       <button id="start-btn" onClick={handleRedirect}>Start testing</button>
