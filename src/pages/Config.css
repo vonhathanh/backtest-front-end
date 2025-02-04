@@ -29,12 +29,21 @@ section {
     padding: 7px;
 }
 
+#start-btn:hover {
+    cursor: pointer;
+}
+
 #upload-btn {
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
     font-size: 0.9rem;
+}
+
+#upload-btn:hover {
+    cursor: pointer;
+    background-color: #ccc;
 }
 
 #upload-icon {
