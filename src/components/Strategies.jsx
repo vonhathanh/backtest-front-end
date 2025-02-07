@@ -1,9 +1,9 @@
 import CheckBox from "./CheckBox";
 
-export default function StrategySelection({ strategies }) {
-    const checkboxes = strategies.map(strategyName => {
+export default function Strategies({ strategies }) {
+    const checkboxes = strategies.map(strategy => {
         return (
-            <CheckBox key={strategyName} name={strategyName} />
+            <CheckBox key={strategy.name} name={strategy.name} />
         )
     })
 
