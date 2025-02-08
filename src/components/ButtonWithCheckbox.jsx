@@ -1,4 +1,4 @@
-export default function CheckedButton(props) {
+export default function ButtonWithCheckbox(props) {
     
     const style = props.isSelected ? { backgroundColor: "black", color: "white" } : {}
 
