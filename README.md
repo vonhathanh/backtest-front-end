@@ -10,3 +10,6 @@
 `npm run dev`
 
 ## Production
+
+## TODOs
+- Alert error when server is not online
