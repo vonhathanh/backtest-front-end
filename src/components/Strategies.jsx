@@ -1,17 +1,18 @@
-import CheckBox from "./CheckBox";
+import StrategyConfig from "./StrategyConfig"
 
 export default function Strategies({ strategies }) {
-    const checkboxes = strategies.map(strategy => {
+
+    const strategyConfigs = strategies.map(strategy => {
         return (
-            <CheckBox key={strategy.name} name={strategy.name} />
+            <StrategyConfig key={strategy.name} name={strategy.name} params={strategy.params} />
         )
     })
 
     return (
         <section>
-            <label htmlFor="strategies">Strategy</label>
-            <section id="checkboxes-container">
-                {checkboxes}
+            <label htmlFor="strategies">Strategies</label>
+            <section id="strategies-container">
+                {strategyConfigs}
             </section>
         </section>
     )
