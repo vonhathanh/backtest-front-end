@@ -9,7 +9,7 @@ export default function Strategies({ strategies }) {
     })
 
     return (
-        <section>
+        <section id="strategies">
             <label htmlFor="strategies">Strategies</label>
             <section id="strategies-container">
                 {strategyConfigs}

@@ -9,19 +9,25 @@ export default function StrategyConfig(props) {
     const inputs = []
 
     for (const [key, value] of Object.entries(props.params)) {
-        inputs.push(<Input label={key} key={key} isEnable={true}/>)
+        inputs.push(<Input label={key} key={key} isEnable={true} />)
     }
 
     function handleClick() {
         setSelected(oldSelected => !oldSelected)
     }
 
+    function handleSave() {
+
+    }
+
     function renderConfig() {
-        if (isSelected && inputs.length > 0 ) {
+        if (isSelected && inputs.length > 0) {
             return (
                 <>
-                {inputs}
-                <button>Save Configuration</button>
+                    <section className="config">
+                        {inputs}
+                    </section>
+                    <Button text={"Save Configuration"} onClick={handleSave} />
                 </>
             )
         }
@@ -29,7 +35,7 @@ export default function StrategyConfig(props) {
 
     return (
         <section>
-            <Button name={props.name} onClick={handleClick} isSelected={isSelected}/>
+            <Button text={props.name} onClick={handleClick} isSelected={isSelected} />
             {renderConfig()}
         </section>
     )
