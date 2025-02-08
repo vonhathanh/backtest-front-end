@@ -4,8 +4,6 @@ import Button from "./Button";
 
 export default function StrategyConfig(props) {
 
-    console.log(props)
-
     const [isSelected, setSelected] = useState(false)
 
     const inputs = []
@@ -18,11 +16,21 @@ export default function StrategyConfig(props) {
         setSelected(oldSelected => !oldSelected)
     }
 
+    function renderConfig() {
+        if (isSelected && inputs.length > 0 ) {
+            return (
+                <>
+                {inputs}
+                <button>Save Configuration</button>
+                </>
+            )
+        }
+    }
+
     return (
         <section>
             <Button name={props.name} onClick={handleClick} isSelected={isSelected}/>
-            {isSelected && inputs}
-            {isSelected && inputs.length > 0 && <button>Save Configuration</button>}
+            {renderConfig()}
         </section>
     )
 }
