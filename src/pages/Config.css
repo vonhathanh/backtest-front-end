@@ -159,8 +159,13 @@ input[type=checkbox] {
 
 section.config {
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
 }

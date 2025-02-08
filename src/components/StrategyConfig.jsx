@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "./Input";
+import CheckedButton from "./CheckedButton";
 import Button from "./Button";
 
 export default function StrategyConfig(props) {
@@ -27,7 +28,7 @@ export default function StrategyConfig(props) {
                     <section className="config">
                         {inputs}
                     </section>
-                    <Button text={"Save Configuration"} onClick={handleSave} />
+                    <Button text={"Clear Configuration"} onClick={handleSave} />
                 </>
             )
         }
@@ -35,7 +36,7 @@ export default function StrategyConfig(props) {
 
     return (
         <section>
-            <Button text={props.name} onClick={handleClick} isSelected={isSelected} />
+            <CheckedButton text={props.name} onClick={handleClick} isSelected={isSelected} />
             {renderConfig()}
         </section>
     )
