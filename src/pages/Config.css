@@ -5,7 +5,7 @@ h1 {
 }
 
 main {
-    min-width: 600px;
+    min-width: 550px;
 }
 
 section {
@@ -18,27 +18,32 @@ section {
     justify-content: space-between;
 }
 
-#start-btn {
-    margin-top: 15px;
-    background-color: black;
-    font-size: 0.9rem;
-    color: white;
+button {
+    background-color: white;
     width: 100%;
-    border-radius: 4px;
-    border: none;
-    padding: 7px;
+    border-radius: 4px; 
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 0.9rem;
 }
 
-#start-btn:hover {
+button:hover {
     cursor: pointer;
 }
 
+.max-width-btn {
+    color: black;
+    width: 100%;
+}
+
+#start-btn {
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+}
+
 #upload-btn {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    font-size: 0.9rem;
+    width: 20%;
 }
 
 #upload-btn:hover {
@@ -55,13 +60,14 @@ section {
 }
 
 .config-group {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 20px;
 }
 
 input[type=text], input[type=date] {
     margin-top: 7px;
-    min-width: 250px;
+    width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -129,12 +135,10 @@ input[type="date"] {
     transform: translate(23px);
 }
 
-#checkboxes-container {
+#strategies-container {
     display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: space-between;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
 }
 
 div.checkbox {
