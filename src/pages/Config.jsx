@@ -6,10 +6,7 @@ import "./Config.css"
 import config from "../config"
 
 import FileSelection from "../components/FileSelection";
-import Input from "../components/Input";
-import DefaultConfig from "../components/DefaultConfig";
-import TimeConfig from "../components/TimeConfig";
-import ManualMode from "../components/ManualMode";
+import GeneralConfig from "../components/GeneralConfig";
 import Strategies from "../components/Strategies";
 
 export default function Config() {
@@ -46,13 +43,7 @@ export default function Config() {
 
       <FileSelection />
 
-      <DefaultConfig />
-
-      <TimeConfig />
-
-      <Input label="Initial Balance" isEnable={true} />
-
-      <ManualMode />
+      <GeneralConfig />
 
       <Strategies strategies={strategies} />
 
