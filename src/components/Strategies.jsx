@@ -12,16 +12,12 @@ export default function Strategies() {
 
     useEffect(() => {
         fetchStrategies()
-        .then(strat => {
-            setStrategies(strat)
-        })
-        .catch(err => {
-            setError(err.message)
-        })
-        .finally(() => {
-            setLoading(false)
-        })
-  }, [])
+            .then(setStrategies)
+            .catch(setError)
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [])
 
 
     const strategyConfigs = strategies.map(strategy => {
@@ -32,7 +28,7 @@ export default function Strategies() {
 
     function render() {
         if (loading) return <Loader />
-        if (error != null) return <ErrorMessage message={`Can't load strategies, reason: ${error}`}/>
+        if (error != null) return <ErrorMessage message={`Can't load strategies, reason: ${error.message}`} />
         return strategyConfigs
     }
 
