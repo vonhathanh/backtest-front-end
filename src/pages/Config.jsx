@@ -29,7 +29,7 @@ export default function Config() {
         })
         setStrategies(response.data.strategies)
       } catch (error) {
-        console.log(error)
+        alert("Couldn't connect to server, failed to load strategies")
       }
     }
 
