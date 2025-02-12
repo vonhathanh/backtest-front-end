@@ -17,13 +17,11 @@ export default function GeneralConfig({ configData }) {
             />
             <DateTimeInput
                 label="Start time"
-                isEnable={configData ? true : false}
-                value={configData ? configData.start_time : ""}
+                config={configData}
             />
             <DateTimeInput
                 label="End time"
-                isEnable={configData ? true : false}
-                value={configData ? configData.end_time : ""}
+                config={configData}
             />
             <Input label="Initial Balance" isEnable={true} />
             <ManualMode />
