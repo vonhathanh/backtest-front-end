@@ -22,12 +22,17 @@ export default function FileSelection({ onChange }) {
 
     useEffect(() => {
         fetchFilesMetadata()
-            .then(setFilesMetadata)
+            .then(data => {
+                setFilesMetadata(data)
+                if (data.length > 0) {
+                    onChange(data[0])
+                }
+            })
             .catch(setError)
             .finally(() => {
                 setLoading(false)
             })
-    }, [])
+    }, [onChange])
 
     function render() {
         if (loading) return <Loader />
