@@ -62,12 +62,13 @@ select:hover, button:hover {
     margin-top: 15px;
 }
 
-input[type=number], input[type=date] {
+input{
     margin-top: 7px;
     width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 0.95rem;
 }
 
 input[type="date"] {
