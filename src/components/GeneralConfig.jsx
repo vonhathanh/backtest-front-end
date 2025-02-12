@@ -9,11 +9,13 @@ export default function GeneralConfig({ configData }) {
                 label="Symbol"
                 isEnable={false}
                 value={configData ? configData.symbol : ""}
+                type="text"
             />
             <Input
                 label="Timeframe"
                 isEnable={false}
                 value={configData ? configData.tf : ""}
+                type="text"
             />
             <DateTimeInput
                 label="Start time"
@@ -23,7 +25,7 @@ export default function GeneralConfig({ configData }) {
                 label="End time"
                 config={configData}
             />
-            <Input label="Initial Balance" isEnable={true} />
+            <Input label="Initial Balance" isEnable={true} type="number" />
             <ManualMode />
         </section>
     );
