@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchFilenames } from "../api"
+import { fetchFilesMetadata } from "../api"
 import Loader from "./Loader"
 import ErrorMessage from "./ErrorMessage"
 
@@ -10,7 +10,7 @@ export default function FileSelection() {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        fetchFilenames()
+        fetchFilesMetadata()
             .then(setFilenames)
             .catch(setError)
             .finally(() => {
@@ -18,16 +18,21 @@ export default function FileSelection() {
             })
     }, [])
 
+    const selectOptions = filenames.map(file => {
+        const name = `${file.symbol}_${file.tf}`
+        return (<option key={name} value={name}>{name}</option>)
+    })
+
     function render() {
         if (loading) return <Loader />
-        if (error) return <ErrorMessage message={`Can't load strategies, reason: ${error.message}`} />
+        if (error) return <ErrorMessage message={`Can't load files metadata, reason: ${error.message}`} />
         return (
             <section id="data-selection">
                 <span>Choose data file</span>
-                <button id="upload-btn">
-                    <i id="upload-icon" className="fa-solid fa-arrow-up-from-bracket icon"></i>
-                    Upload File
-                </button>
+                <select name="files" id="files" >
+                    {selectOptions}
+                </select>
+                
             </section>
         )
     }
