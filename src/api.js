@@ -8,15 +8,15 @@ export async function fetchStrategies() {
             "Access-Control-Allow-Origin": "*",
         },
     });
-    return response.data.strategies
+    return response.data
 }
 
 
-export async function fetchFilenames() {
-    const response = await axios.get(`${config.apiUrl}/filenames`, {
+export async function fetchFilesMetadata() {
+    const response = await axios.get(`${config.apiUrl}/files/metadata`, {
         headers: {
             "Access-Control-Allow-Origin": "*",
         },
     });
-    return response.data.filenames
+    return response.data
 }
