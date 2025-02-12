@@ -5,8 +5,11 @@ import "./Config.css"
 import FileSelection from "../components/FileSelection";
 import GeneralConfig from "../components/GeneralConfig";
 import Strategies from "../components/Strategies";
+import { useState } from "react";
 
 export default function Config() {
+
+  const [configData, setConfigData] = useState(null)
 
   const navigate = useNavigate();
 
@@ -14,14 +17,14 @@ export default function Config() {
     navigate("/backtest")
   }
 
-
   return (
     <main>
+
       <h1>Trading Strategy Configuration</h1>
 
-      <FileSelection />
+      <FileSelection onChange={setConfigData}/>
 
-      <GeneralConfig />
+      <GeneralConfig configData={configData}/>
 
       <Strategies />
 
