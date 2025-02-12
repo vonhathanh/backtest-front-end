@@ -37,17 +37,17 @@ button:hover {
     color: white;
 }
 
-#upload-btn {
-    width: 20%;
-}
-
-#upload-btn:hover {
-    cursor: pointer;
-    background-color: #ccc;
-}
-
 .icon {
     margin: 0 5px 0 5px;
+}
+
+#files {
+    font-size: 0.9rem;
+    padding: 5px;
+}
+
+#files > option {
+    font-size: 0.9rem;
 }
 
 #data-selection > span {
@@ -141,7 +141,7 @@ input[type="date"] {
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
     margin-top: 10px;
-    row-gap: 10px;
+    row-gap: 15px;
 }
 
 div.checkbox {
