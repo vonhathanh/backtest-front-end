@@ -10,7 +10,7 @@ export default function StrategyConfig(props) {
     const inputs = []
 
     for (const [key, value] of Object.entries(props.params)) {
-        inputs.push(<Input label={key} key={key} isEnable={true} type="number" />)
+        inputs.push(<Input label={key} key={key} type="number" />)
     }
 
     function handleClick() {

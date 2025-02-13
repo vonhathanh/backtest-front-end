@@ -20,7 +20,7 @@ export default function GeneralConfig({ configData, onChange }) {
                 onChange={onChange}
             />
 
-            <Input label="Initial Balance" isEnable={true} type="number" />
+            <Input label="Initial Balance" type="number" />
 
             <ManualMode />
         </section>

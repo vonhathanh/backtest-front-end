@@ -1,8 +1,8 @@
-export default function Input({label, isEnable, value, type}) {
+export default function Input({label, value, type}) {
     return (
         <section>
             <label htmlFor={label}>{label}</label><br/>
-            <input type={type} name={label} disabled={isEnable ? "" : "disabled"} value={value} />
+            <input type={type} name={label} value={value} />
         </section>
     )
 }
