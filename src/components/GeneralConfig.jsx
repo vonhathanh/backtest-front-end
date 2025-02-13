@@ -1,31 +1,27 @@
 import Input from "./Input";
 import DateTimeInput from "./DateTimeInput";
 import ManualMode from "./ManualMode";
+import Label from "./Label";
 
-export default function GeneralConfig({ configData }) {
+export default function GeneralConfig({ configData, onChange }) {
     return (
         <section className="config-group">
-            <Input
-                label="Symbol"
-                isEnable={false}
-                value={configData ? configData.symbol : ""}
-                type="text"
-            />
-            <Input
-                label="Timeframe"
-                isEnable={false}
-                value={configData ? configData.tf : ""}
-                type="text"
-            />
+            <Label text="Symbol" value={configData ? configData.symbol : ""} />
+            <Label text="Timeframe" value={configData ? configData.tf : ""} />
+
             <DateTimeInput
                 label="Start time"
                 config={configData}
+                onChange={onChange}
             />
             <DateTimeInput
                 label="End time"
                 config={configData}
+                onChange={onChange}
             />
+
             <Input label="Initial Balance" isEnable={true} type="number" />
+
             <ManualMode />
         </section>
     );
