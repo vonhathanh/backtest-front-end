@@ -4,7 +4,7 @@ export default function ButtonWithCheckbox(props) {
 
     return (
         <>
-            <button className="max-width-btn flex" style={style} onClick={props.onClick}>
+            <button type="button" className="max-width-btn flex" style={style} onClick={props.onClick}>
                 {props.text}
                 {props.isSelected && <i className="fa-solid fa-check checked-icon"></i>}
             </button>
