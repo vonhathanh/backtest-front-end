@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router";
-
-import "./Config.css"
+import { useCallback, useState } from "react";
 
 import FileSelection from "../components/FileSelection";
 import GeneralConfig from "../components/GeneralConfig";
 import Strategies from "../components/Strategies";
-import { useCallback, useState } from "react";
+
+import "./Config.css"
 
 export default function Config() {
 
@@ -15,25 +15,49 @@ export default function Config() {
     setConfigData(data)
   }, [])
 
+
+  function onDateTimeChange(label, newValue) {
+    const updatedConfig = { ...configData };
+    if (label.includes("Start")) {
+      updatedConfig.start_time = newValue;
+    } else {
+      updatedConfig.end_time = newValue;
+    }
+    setConfigData(updatedConfig);
+  }
+
   const navigate = useNavigate();
 
-  function handleRedirect() {
+  function handleSubmit(formData) {
+    const backtestParams = {
+      generalConfig: {
+        symbol: configData.symbol,
+        tf: configData.tf,
+        start_time: formData.get("Start time"),
+        end_time: formData.get("End time"),
+        initial_balance: formData.get("Initial Balance")
+      },
+      strategies: {
+
+      }
+    }
+
     navigate("/backtest")
   }
 
   return (
     <main>
+      <form action={handleSubmit}>
+        <h1>Trading Strategy Configuration</h1>
 
-      <h1>Trading Strategy Configuration</h1>
+        <FileSelection onChange={handleFileSelected} />
 
-      <FileSelection onChange={handleFileSelected}/>
+        <GeneralConfig configData={configData} onChange={onDateTimeChange} />
 
-      <GeneralConfig configData={configData}/>
+        <Strategies />
 
-      <Strategies />
-
-      <button id="start-btn" onClick={handleRedirect}>Start testing</button>
-
+        <button id="start-btn" type="submit" >Start testing</button>
+      </form>
     </main>
   )
 }
