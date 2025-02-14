@@ -2,8 +2,12 @@ import Input from "./Input";
 import DateTimeInput from "./DateTimeInput";
 import ManualMode from "./ManualMode";
 import Label from "./Label";
+import { useState } from "react";
 
-export default function GeneralConfig({ metadata, onChange, startTime, endTime }) {
+export default function GeneralConfig({ metadata }) {
+    const [startTime, setStartTime] = useState("")
+    const [endTime, setEndTime] = useState("")
+
     return (
         <section className="config-group">
             <Label text="Symbol" value={metadata?.symbol || ""} />
@@ -12,13 +16,13 @@ export default function GeneralConfig({ metadata, onChange, startTime, endTime }
             <DateTimeInput
                 label="Start time"
                 config={metadata}
-                onChange={onChange}
+                onChange={(value) => setStartTime(value)}
                 value={startTime}
             />
             <DateTimeInput
                 label="End time"
                 config={metadata}
-                onChange={onChange}
+                onChange={(value) => setEndTime(value)}
                 value={endTime}
             />
 

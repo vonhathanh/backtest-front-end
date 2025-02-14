@@ -14,24 +14,13 @@ export default function Config() {
 
   const [metadata, setMetadata] = useState(null)
 
-  const [datetimeConfig, setDatetimeConfig] = useState({ startTime: "", endTime: "" })
-
   const [strategies, dispatch] = useReducer(strategyReducer, {})
 
   const navigate = useNavigate();
 
-  const handleFileSelected = useCallback((data) => {
+  const handleFileSelection = useCallback((data) => {
     setMetadata(data)
-    setDatetimeConfig({ startTime: "", endTime: "" })
   }, [])
-
-  function onDateTimeChange(label, newValue) {
-    if (label.includes("Start")) {
-      setDatetimeConfig({ ...datetimeConfig, startTime: newValue })
-    } else {
-      setDatetimeConfig({ ...datetimeConfig, endTime: newValue })
-    }
-  }
 
   function handleSubmit(formData) {
     const backtestParams = {
@@ -51,17 +40,14 @@ export default function Config() {
       <form action={handleSubmit}>
         <h1>Trading Strategy Configuration</h1>
 
-        <FileSelection onChange={handleFileSelected} />
+        <FileSelection onChange={handleFileSelection} />
 
-        <GeneralConfig metadata={metadata}
-          onChange={onDateTimeChange}
-          startTime={datetimeConfig.startTime}
-          endTime={datetimeConfig.endTime} />
+        <GeneralConfig metadata={metadata} />
 
         <StrategyContext.Provider value={dispatch}>
           <Strategies />
         </StrategyContext.Provider>
-        
+
         <button id="start-btn" type="submit" >Start testing</button>
       </form>
     </main>

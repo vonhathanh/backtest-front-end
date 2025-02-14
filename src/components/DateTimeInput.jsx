@@ -15,7 +15,7 @@ export default function DateTimeInput({ label, config, onChange, value }) {
                 value={getValue()}
                 min={config?.start_time || ""}
                 max={config?.end_time || ""}
-                onChange={(e) => onChange(label, e.target.value)}
+                onChange={(e) => onChange(e.target.value)}
             />
         </section>
     )
