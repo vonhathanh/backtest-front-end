@@ -19,7 +19,7 @@ export default function StrategyConfig(props) {
         setSelected((oldSelected) => !oldSelected);
         dispatch({
             type: "selected",
-            id: props.name
+            strategyId: props.name
         })
     }
 

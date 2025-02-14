@@ -12,7 +12,7 @@ export default function Input({ label, value, type, parent }) {
             type={type} 
             name={label} 
             value={value} 
-            onChange={parent ? (event) => dispatch({ type: "updated", id: parent, name: label, value: event.target.value }) : undefined} />
+            onChange={parent ? (event) => dispatch({ type: "updated", strategyId: parent, name: label, value: event.target.value }) : undefined} />
         </section>
     )
 }

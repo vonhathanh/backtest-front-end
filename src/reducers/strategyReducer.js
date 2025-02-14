@@ -1,14 +1,14 @@
 export function strategyReducer(strategies, action) {
     switch (action.type) {
         case 'selected': {
-            if (strategies[action.id] === undefined)
-                strategies[action.id] = {};
-            else delete strategies[action.id]
+            if (strategies[action.strategyId] === undefined)
+                strategies[action.strategyId] = {};
+            else delete strategies[action.strategyId]
 
             return strategies
         }
         case "updated": {
-            strategies[action.id][action.name] = action.value
+            strategies[action.strategyId][action.name] = action.value
             return strategies
         }
         default: {
