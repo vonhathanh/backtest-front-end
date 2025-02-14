@@ -3,21 +3,23 @@ import DateTimeInput from "./DateTimeInput";
 import ManualMode from "./ManualMode";
 import Label from "./Label";
 
-export default function GeneralConfig({ configData, onChange }) {
+export default function GeneralConfig({ metadata, onChange, startTime, endTime }) {
     return (
         <section className="config-group">
-            <Label text="Symbol" value={configData ? configData.symbol : ""} />
-            <Label text="Timeframe" value={configData ? configData.tf : ""} />
+            <Label text="Symbol" value={metadata?.symbol || ""} />
+            <Label text="Timeframe" value={metadata?.tf || ""} />
 
             <DateTimeInput
                 label="Start time"
-                config={configData}
+                config={metadata}
                 onChange={onChange}
+                value={startTime}
             />
             <DateTimeInput
                 label="End time"
-                config={configData}
+                config={metadata}
                 onChange={onChange}
+                value={endTime}
             />
 
             <Input label="Initial Balance" type="number" />

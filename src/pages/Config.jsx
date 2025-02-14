@@ -9,40 +9,36 @@ import "./Config.css"
 
 export default function Config() {
 
-  const [configData, setConfigData] = useState(null)
+  const [metadata, setMetadata] = useState(null)
 
-  const handleFileSelected = useCallback((data) => {
-    setConfigData(data)
-  }, [])
-
-
-  function onDateTimeChange(label, newValue) {
-    const updatedConfig = { ...configData };
-    if (label.includes("Start")) {
-      updatedConfig.start_time = newValue;
-    } else {
-      updatedConfig.end_time = newValue;
-    }
-    setConfigData(updatedConfig);
-  }
+  const [datetimeConfig, setDatetimeConfig] = useState({ startTime: "", endTime: "" })
 
   const navigate = useNavigate();
 
+  const handleFileSelected = useCallback((data) => {
+    setMetadata(data)
+    setDatetimeConfig({ startTime: "", endTime: "" })
+  }, [])
+
+  function onDateTimeChange(label, newValue) {
+    if (label.includes("Start")) {
+      setDatetimeConfig({ ...datetimeConfig, startTime: newValue })
+    } else {
+      setDatetimeConfig({ ...datetimeConfig, endTime: newValue })
+    }
+  }
+
   function handleSubmit(formData) {
     const backtestParams = {
-      generalConfig: {
-        symbol: configData.symbol,
-        tf: configData.tf,
-        start_time: formData.get("Start time"),
-        end_time: formData.get("End time"),
-        initial_balance: formData.get("Initial Balance")
-      },
-      strategies: {
-
-      }
+      symbol: metadata.symbol,
+      tf: metadata.tf,
+      startTime: formData.get("Start time"),
+      endTime: formData.get("End time"),
+      initialBalance: formData.get("Initial Balance"),
+      strategies: {}
     }
-
-    navigate("/backtest")
+    console.log(backtestParams)
+    navigate("/backtest", { state: backtestParams })
   }
 
   return (
@@ -52,7 +48,10 @@ export default function Config() {
 
         <FileSelection onChange={handleFileSelected} />
 
-        <GeneralConfig configData={configData} onChange={onDateTimeChange} />
+        <GeneralConfig metadata={metadata}
+          onChange={onDateTimeChange}
+          startTime={datetimeConfig.startTime}
+          endTime={datetimeConfig.endTime} />
 
         <Strategies />
 

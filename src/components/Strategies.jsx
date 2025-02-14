@@ -19,7 +19,6 @@ export default function Strategies() {
             })
     }, [])
 
-
     const strategyConfigs = strategies.map(strategy => {
         return (
             <StrategyConfig key={strategy.name} name={strategy.name} params={strategy.params} />

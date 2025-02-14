@@ -1,6 +1,7 @@
-export default function DateTimeInput({ label, config, onChange }) {
+export default function DateTimeInput({ label, config, onChange, value }) {
     function getValue() {
         if (!config) return ""
+        if (value) return value
         return label.includes("Start") ? config.start_time : config.end_time
     }
 
