@@ -1,17 +1,22 @@
 import { useNavigate } from "react-router";
-import { useCallback, useState } from "react";
+import { createContext, useCallback, useReducer, useState } from "react";
 
 import FileSelection from "../components/FileSelection";
 import GeneralConfig from "../components/GeneralConfig";
 import Strategies from "../components/Strategies";
 
 import "./Config.css"
+import { strategyReducer } from "../reducers/strategyReducer";
+
+export const StrategyContext = createContext({})
 
 export default function Config() {
 
   const [metadata, setMetadata] = useState(null)
 
   const [datetimeConfig, setDatetimeConfig] = useState({ startTime: "", endTime: "" })
+
+  const [strategies, dispatch] = useReducer(strategyReducer, {})
 
   const navigate = useNavigate();
 
@@ -35,7 +40,7 @@ export default function Config() {
       startTime: formData.get("Start time"),
       endTime: formData.get("End time"),
       initialBalance: formData.get("Initial Balance"),
-      strategies: {}
+      strategies: strategies
     }
     console.log(backtestParams)
     navigate("/backtest", { state: backtestParams })
@@ -53,8 +58,10 @@ export default function Config() {
           startTime={datetimeConfig.startTime}
           endTime={datetimeConfig.endTime} />
 
-        <Strategies />
-
+        <StrategyContext.Provider value={dispatch}>
+          <Strategies />
+        </StrategyContext.Provider>
+        
         <button id="start-btn" type="submit" >Start testing</button>
       </form>
     </main>
