@@ -46,9 +46,6 @@ select:hover, button:hover {
     padding: 5px;
 }
 
-#files > option {
-    font-size: 0.9rem;
-}
 
 #data-selection > span {
     align-self: center;
@@ -187,4 +184,10 @@ section.error {
     padding: 7px 5px 7px 0px;
     border: 1px solid red;
     border-radius: 5px;
+}
+
+#form-input {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
 }
