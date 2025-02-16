@@ -40,14 +40,16 @@ export default function Config() {
       <form action={handleSubmit}>
         <h1>Trading Strategy Configuration</h1>
 
-        <FileSelection onChange={handleFileSelection} />
+        <div id="form-input">
+          <FileSelection onChange={handleFileSelection} />
 
-        <GeneralConfig metadata={metadata} />
+          <GeneralConfig metadata={metadata} />
 
-        <StrategyContext.Provider value={dispatch}>
-          <Strategies />
-        </StrategyContext.Provider>
-
+          <StrategyContext.Provider value={dispatch}>
+            <Strategies />
+          </StrategyContext.Provider>
+        </div>
+        
         <button id="start-btn" type="submit" >Start testing</button>
       </form>
     </main>
