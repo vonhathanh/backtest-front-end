@@ -31,7 +31,6 @@ export default function Config() {
       initialBalance: formData.get("Initial Balance"),
       strategies: strategies
     }
-    console.log(backtestParams)
     navigate("/backtest", { state: backtestParams })
   }
 
