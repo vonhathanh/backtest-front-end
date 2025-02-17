@@ -46,6 +46,9 @@ select:hover, button:hover {
     padding: 5px;
 }
 
+#files > option {
+    font-size: 0.9rem;
+}
 
 #data-selection > span {
     align-self: center;
