@@ -35,7 +35,7 @@ export default function Config() {
   }
 
   return (
-    <main>
+    <main className="config">
       <form action={handleSubmit}>
         <h1>Trading Strategy Configuration</h1>
 
