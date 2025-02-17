@@ -4,9 +4,11 @@ import { StrategyContext } from "../pages/Config";
 export default function Input({ label, value, type, parent }) {
     const dispatch = useContext(StrategyContext);
 
+    const style = parent ? {fontSize: "0.875rem"} : {fontSize: "1rem"}
+
     return (
         <section>
-            <label htmlFor={label}>{label}</label>
+            <label style={style} htmlFor={label}>{label}</label>
             <br />
             <input
                 type={type}

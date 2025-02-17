@@ -4,6 +4,9 @@
     font-family: sans-serif;
 }
 
+label {
+    font-weight: 700;
+}
 body {
     display: flex;
     justify-content: center;

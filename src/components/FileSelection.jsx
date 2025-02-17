@@ -39,7 +39,7 @@ export default function FileSelection({ onChange }) {
         if (error) return <ErrorMessage message={`Can't load files metadata, reason: ${error.message}`} />
         return (
             <section id="data-selection">
-                <span>Choose data file</span>
+                <label>Choose data file</label>
                 <select name="files" id="files" onChange={handleFileSelected}>
                     {selectOptions}
                 </select>
