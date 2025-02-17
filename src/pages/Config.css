@@ -8,9 +8,8 @@ main {
     min-width: 500px;
 }
 
-#data-selection {
-    display: flex;
-    justify-content: space-between;
+label {
+    font-weight: 700;
 }
 
 button {
@@ -29,6 +28,11 @@ select:hover, button:hover {
 .max-width-btn {
     color: black;
     width: 100%;
+}
+
+#data-selection {
+    display: flex;
+    justify-content: space-between;
 }
 
 #start-btn {
