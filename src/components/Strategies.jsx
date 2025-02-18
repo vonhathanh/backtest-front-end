@@ -28,15 +28,17 @@ export default function Strategies() {
     function render() {
         if (loading) return <Loader />
         if (error != null) return <ErrorMessage message={`Can't load strategies, reason: ${error.message}`} />
-        return strategyConfigs
+        return (
+            <section id="strategies-container">
+                {strategyConfigs}
+            </section>
+        )
     }
 
     return (
         <section id="strategies">
             <label htmlFor="strategies">Strategies</label>
-            <section id="strategies-container">
-                {render()}
-            </section>
+            {render()}
         </section>
     )
 }

@@ -33,6 +33,7 @@ select:hover, button:hover {
 #data-selection {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #start-btn {
@@ -191,6 +192,7 @@ section.error {
     padding: 7px 5px 7px 0px;
     border: 1px solid red;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 #form-input {
