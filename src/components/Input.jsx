@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { StrategyContext } from "../pages/Config";
+import { toCamelCase } from "../utils";
 
 export default function Input({ label, value, type, parent }) {
     const dispatch = useContext(StrategyContext);
@@ -20,8 +21,8 @@ export default function Input({ label, value, type, parent }) {
                               dispatch({
                                   type: "updated",
                                   strategyId: parent,
-                                  name: label,
-                                  value: event.target.value,
+                                  name: toCamelCase(label),
+                                  value: type === "number" ? Number(event.target.value) : event.target.value,
                               })
                         : undefined
                 }
