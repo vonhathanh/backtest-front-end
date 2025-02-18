@@ -24,12 +24,14 @@ export default function Config() {
 
   function handleSubmit(formData) {
     const backtestParams = {
-      symbol: metadata.symbol,
-      tf: metadata.tf,
-      startTime: formData.get("Start time"),
-      endTime: formData.get("End time"),
-      initialBalance: formData.get("Initial Balance"),
-      strategies: strategies
+      generalConfig: {
+        symbol: metadata.symbol,
+        timeframe: metadata.tf,
+        startTime: formData.get("Start time"),
+        endTime: formData.get("End time"),
+        initialBalance: Number(formData.get("Initial Balance")),
+      },
+      strategies: Object.entries(strategies)
     }
     navigate("/backtest", { state: backtestParams })
   }
@@ -48,7 +50,7 @@ export default function Config() {
             <Strategies />
           </StrategyContext.Provider>
         </div>
-        
+
         <button id="start-btn" type="submit" >Start testing</button>
       </form>
     </main>
