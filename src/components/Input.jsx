@@ -5,6 +5,7 @@ import { toCamelCase } from "../utils";
 export default function Input({ label, value, type, parent }) {
     const dispatch = useContext(StrategyContext);
 
+    // smaller font size for label in StrategyConfig
     const style = parent ? {fontSize: "0.875rem"} : {fontSize: "1rem"}
 
     return (
@@ -15,6 +16,7 @@ export default function Input({ label, value, type, parent }) {
                 type={type}
                 name={label}
                 value={value}
+                required
                 onChange={
                     parent
                         ? (event) =>
