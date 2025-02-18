@@ -23,15 +23,10 @@ export default function StrategyConfig(props) {
         })
     }
 
-    function handleSave() {}
-
     function renderConfig() {
         if (isSelected && inputs.length > 0) {
             return (
-                <>
-                    <section className="config">{inputs}</section>
-                    <Button text={"Clear Configuration"} onClick={handleSave} />
-                </>
+                <section className="config">{inputs}</section>
             );
         }
     }
