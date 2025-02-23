@@ -26,7 +26,7 @@ export default function GeneralConfig({ metadata }) {
                 value={endTime}
             />
 
-            <Input label="Initial Balance" type="number" />
+            <Input label="Initial Balance" type="number" defaultValue={100000} />
 
             <ManualMode />
         </section>

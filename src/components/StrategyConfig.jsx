@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import Input from "./Input";
 import ButtonWithCheckbox from "./ButtonWithCheckbox";
-import Button from "./Button";
 import { StrategyContext } from "../pages/Config";
 
 export default function StrategyConfig(props) {
@@ -12,7 +11,7 @@ export default function StrategyConfig(props) {
     const inputs = [];
 
     for (const [key, value] of Object.entries(props.params)) {
-        inputs.push(<Input label={key} key={key} type="number" parent={props.name}/>);
+        inputs.push(<Input label={key} key={key} type="number" parent={props.name} defaultValue={value.defaultValue} />);
     }
 
     function handleClick() {

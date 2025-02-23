@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { StrategyContext } from "../pages/Config";
 import { toCamelCase } from "../utils";
 
-export default function Input({ label, value, type, parent }) {
+export default function Input({ label, value, type, parent, defaultValue }) {
     const dispatch = useContext(StrategyContext);
 
     // smaller font size for label in StrategyConfig
@@ -16,6 +16,7 @@ export default function Input({ label, value, type, parent }) {
                 type={type}
                 name={label}
                 value={value}
+                defaultValue={defaultValue? defaultValue : undefined}
                 required
                 onChange={
                     parent
