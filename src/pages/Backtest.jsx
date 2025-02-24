@@ -7,7 +7,7 @@ import SuperChart from "../components/SuperChart"
 export default function Backtest() {
     const location = useLocation()
     const backtestParams = location.state
-
+    
     if (!backtestParams) {
         return <ErrorMessage message="Backtest parameters are not valid/null" />
     }

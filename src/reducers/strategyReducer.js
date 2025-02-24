@@ -2,7 +2,7 @@ export function strategyReducer(strategies, action) {
     switch (action.type) {
         case 'selected': {
             if (strategies[action.strategyId] === undefined)
-                strategies[action.strategyId] = {};
+                strategies[action.strategyId] = action.values;
             else delete strategies[action.strategyId]
 
             return strategies

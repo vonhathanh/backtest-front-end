@@ -26,7 +26,6 @@ const CandleStickChart = ({ data, symbol, timeframe }) => {
         annotations: {
             xaxis: [
                 {
-                    x: 'Oct 06 14:00',
                     borderColor: '#00E396',
                     label: {
                         borderColor: '#00E396',
@@ -37,7 +36,6 @@ const CandleStickChart = ({ data, symbol, timeframe }) => {
                         },
                         orientation: 'horizontal',
                         offsetY: 7,
-                        text: 'Annotation Test'
                     }
                 }
             ]
