@@ -1,9 +1,10 @@
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
 // Convert to functional component with hooks
-const CandleStickChart = ({ data, symbol, timeframe }) => {
-    const [chartOptions, setChartOptions] = useState({
+const CandleStickChart = ({ data, symbol, timeframe, sendJsonMessage }) => {
+    const chartOptions = {
         chart: {
             height: 350,
             type: 'candlestick',
@@ -11,6 +12,11 @@ const CandleStickChart = ({ data, symbol, timeframe }) => {
                 beforeMount: function (chart) {
                     chart.el.addEventListener('mousewheel', (e) => { }, { passive: true });
                     chart.el.addEventListener('touchstart', (e) => { }, { passive: true });
+                },
+                updated: function (chartContext, config) {
+                    sendJsonMessage({
+                        "message": "render_finished",
+                    })
                 }
             }
         },
@@ -44,7 +50,12 @@ const CandleStickChart = ({ data, symbol, timeframe }) => {
             enabled: true,
         },
         xaxis: {
-            type: 'datetime',
+            type: 'category',
+            labels: {
+                formatter: function (val) {
+                    return dayjs(val).format("YYYY/MM/DD")
+                }
+            }
         },
         yaxis: {
             opposite: true,
@@ -52,7 +63,7 @@ const CandleStickChart = ({ data, symbol, timeframe }) => {
                 enabled: true
             }
         }
-    });
+    };
 
     const [series, setSeries] = useState([{
         name: 'candle',
@@ -66,17 +77,6 @@ const CandleStickChart = ({ data, symbol, timeframe }) => {
             data: data
         }]);
     }, [data]);
-
-    // Update chart options when symbol or timeframe changes
-    useEffect(() => {
-        setChartOptions(prev => ({
-            ...prev,
-            title: {
-                ...prev.title,
-                text: `${symbol} - ${timeframe}`
-            }
-        }));
-    }, [symbol, timeframe]);
 
     return (
         <div>

@@ -23,15 +23,21 @@ export default function SuperChart({ params }) {
                     x: message.open_time,
                     y: [message.open, message.high, message.low, message.close]
                 }
-                setData((prevCandles) => [...prevCandles, candle])
+                setData((prevCandles) => [...prevCandles.slice(-config.maxCandlesOnPage), candle])
             }
         }
     })
+    
 
     return (
         <>
             <section className="chart-container">
-                <CandleStickChart data={data} symbol={params.symbol} timeframe={params.timeframe} />
+                <CandleStickChart
+                    data={data}
+                    symbol={params.symbol}
+                    timeframe={params.timeframe}
+                    sendJsonMessage={sendJsonMessage}
+                />
             </section>
 
             <section>
