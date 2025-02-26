@@ -1,22 +1,31 @@
+import dayjs from "dayjs"
+
 const chartOptions = {
     series: [{
         data: []
     }],
+    noData: {
+        text: 'Loading...'
+    },
     chart: {
         type: 'candlestick',
         height: 350
     },
     title: {
-        text: 'CandleStick Chart',
+        text: '',
         align: 'left'
     },
     xaxis: {
-        type: 'datetime'
+        type: 'category',
+        labels: {
+            formatter: function (val) {
+                return dayjs(val).format("YYYY/MM/DD")
+            }
+        }
     },
     yaxis: {
-        tooltip: {
-            enabled: true
-        }
+        opposite: true,
+        decimalsInFloat: 1,
     }
 };
 

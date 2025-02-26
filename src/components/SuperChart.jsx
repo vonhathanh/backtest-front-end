@@ -18,11 +18,11 @@ export default function SuperChart({ params }) {
                 "params": params,
             })
         },
-        onMessage: (messageEvent) => {
-            const event = JSON.parse(messageEvent.data)
+        onMessage: (event) => {
+            const eventData = JSON.parse(event.data)
             
-            if (event.type === "new_candle") {
-                updateChartData(event.message)
+            if (eventData.type === "new_candle") {
+                updateChartData(eventData.message)
                 sendJsonMessage({
                     "type": "notification",
                     "message": "frontend_updated",
@@ -33,6 +33,7 @@ export default function SuperChart({ params }) {
 
     useEffect(() => {
         if (chartContainerRef.current && !chartInstanceRef.current) {
+            chartOptions.title.text = `${params.symbol} - ${params.timeframe}`
             chartInstanceRef.current = new ApexCharts(
                 document.querySelector("#candlestick-chart"),
                 chartOptions,
@@ -60,7 +61,7 @@ export default function SuperChart({ params }) {
         <>
             <section id="candlestick-chart" ref={chartContainerRef}></section>
 
-            <section>
+            <section id="account-info">
                 <section>Positions</section>
                 <section>Open orders</section>
                 <section>Order history</section>
