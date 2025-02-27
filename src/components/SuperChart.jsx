@@ -4,10 +4,16 @@ import config from "../config"
 import chartOptions from "../chartOption"
 import { useEffect, useRef, useState } from "react"
 import ApexCharts from "apexcharts"
+import PositionsTable from "./PositionsTable"
+import Tab from "./Tab"
 
 export default function SuperChart({ params }) {
 
-    const [data, setData] = useState([])
+    const [prices, setPrices] = useState([])
+    const [currentTab, setcurrentTab] = useState('positions')
+    const [positions, setPositions] = useState([])
+    const [openOrders, setOpenOrders] = useState([])
+
     const chartContainerRef = useRef(null)
     const chartInstanceRef = useRef(null)
 
@@ -20,9 +26,10 @@ export default function SuperChart({ params }) {
         },
         onMessage: (event) => {
             const eventData = JSON.parse(event.data)
-            
-            if (eventData.type === "new_candle") {
-                updateChartData(eventData.message)
+
+            if (eventData.type === "update") {
+                updateChartData(eventData.message.price)
+                updateAccountInfo(eventData.message)
                 sendJsonMessage({
                     "type": "notification",
                     "message": "frontend_updated",
@@ -31,7 +38,7 @@ export default function SuperChart({ params }) {
         }
     })
 
-    useEffect(() => {
+    useEffect(function renderChart() {
         if (chartContainerRef.current && !chartInstanceRef.current) {
             chartOptions.title.text = `${params.symbol} - ${params.timeframe}`
             chartInstanceRef.current = new ApexCharts(
@@ -48,24 +55,28 @@ export default function SuperChart({ params }) {
             y: [message.open, message.high, message.low, message.close]
         }
 
-        setData((prevCandles) => [...prevCandles.slice(-config.maxCandlesOnPage), candle])
+        setPrices((prevCandles) => [...prevCandles.slice(-config.maxCandlesOnPage), candle])
 
-        chartInstanceRef.current.updateSeries([{
-            name: "candlestick",
-            data: data
-        }])
+        chartInstanceRef.current.updateSeries([{ name: "candlestick", data: prices }])
     }
 
+
+    function updateAccountInfo(message) {
+        setPositions(message.positions)
+        setOpenOrders(message.orders)
+    }
 
     return (
         <>
             <section id="candlestick-chart" ref={chartContainerRef}></section>
 
             <section id="account-info">
-                <section>Positions</section>
-                <section>Open orders</section>
-                <section>Order history</section>
+                <Tab currentTab={currentTab} name="positions" onClick={setcurrentTab} value="Positions" />
+                <Tab currentTab={currentTab} name="openOrders" onClick={setcurrentTab} value="Open Orders" />
             </section>
+
+            {currentTab === 'positions' && <PositionsTable price={prices[prices.length - 1]?.y[0]} positions={positions} />}
+            {/* {currentTab === 'openOrders' && <OrdersTable data={openOrders} />} */}
         </>
     )
 }
