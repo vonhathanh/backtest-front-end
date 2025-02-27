@@ -13,7 +13,12 @@ const chartOptions = {
     },
     title: {
         text: '',
-        align: 'left'
+        align: 'left',
+        style: {
+            fontSize: '26px',
+            fontWeight: 'bold',
+            fontFamily: 'sans-serif'
+        }
     },
     xaxis: {
         type: 'category',
