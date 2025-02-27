@@ -4,6 +4,30 @@ main.backtest {
     min-width: 100vw;
 }
 
-.chart-information {
-    padding: 7px;
+#account-info {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.tab {
+    font-weight: bold;
+}
+
+table {
+    margin: 10px 10px;
+    width: calc(100% - 20px);
+    text-align: left;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    width: 20%;
+    padding: 5px;
 }
