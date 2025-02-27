@@ -4,7 +4,7 @@ import { fetchStrategies } from "../api"
 import Loader from "./Loader"
 import ErrorMessage from "./ErrorMessage"
 
-export default function Strategies() {
+export default function StrategiesContainer() {
 
     const [strategies, setStrategies] = useState([])
     const [loading, setLoading] = useState(true)

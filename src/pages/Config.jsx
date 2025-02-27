@@ -3,7 +3,7 @@ import { createContext, useCallback, useReducer, useState } from "react";
 
 import FileSelection from "../components/FileSelection";
 import GeneralConfig from "../components/GeneralConfig";
-import Strategies from "../components/Strategies";
+import StrategiesContainer from "../components/StrategiesContainer";
 
 import "./Config.css"
 import { strategyReducer } from "../reducers/strategyReducer";
@@ -47,7 +47,7 @@ export default function Config() {
           <GeneralConfig metadata={metadata} />
 
           <StrategyContext.Provider value={dispatch}>
-            <Strategies />
+            <StrategiesContainer />
           </StrategyContext.Provider>
         </div>
 
