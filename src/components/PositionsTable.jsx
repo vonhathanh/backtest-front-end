@@ -1,10 +1,9 @@
-export default function PositionsTable(props) {
-    const positions = props.positions.map((position, index) => {
+export default function PositionsTable({positions, price}) {
+    const rows = positions.map((position, index) => {
         let pnl = 0.0
-        if (props.price) {
-            pnl = Number(position.quantity * (props.price - position.averagePrice)).toFixed(2)
+        if (price) {
+            pnl = Number(position.quantity * (price - position.averagePrice)).toFixed(2)
             if (position.side === 'SHORT') pnl *= -1
-            console.log(pnl)
         }
         return (
             <tr key={index}>
@@ -18,7 +17,7 @@ export default function PositionsTable(props) {
     })
     
     return (
-        <table className="position-container">
+        <table id="positions-table">
             <thead>
                 <tr>
                     <th>Side</th>
@@ -29,7 +28,7 @@ export default function PositionsTable(props) {
                 </tr>
             </thead>
             <tbody>
-                {positions}
+                {rows}
             </tbody>
         </table>
     )
