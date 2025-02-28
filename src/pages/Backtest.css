@@ -6,7 +6,6 @@ main.backtest {
 
 #account-info {
     display: flex;
-    flex-direction: row;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -14,6 +13,9 @@ main.backtest {
 
 .tab {
     font-weight: bold;
+    border-radius: 0;
+    display: inline-block;
+    width: 100%;
 }
 
 table {
@@ -22,12 +24,20 @@ table {
     text-align: left;
 }
 
+
 table, th, td {
     border: 1px solid black;
-    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 th, td {
-    width: 20%;
     padding: 5px;
+}
+
+#positions-table > th, td {
+    width: 20%
+}
+
+#orders-table > th, td {
+    width: 16%
 }
