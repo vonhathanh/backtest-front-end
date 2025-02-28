@@ -9,7 +9,7 @@ const chartOptions = {
     },
     chart: {
         type: 'candlestick',
-        height: 350
+        height: 450
     },
     title: {
         text: '',

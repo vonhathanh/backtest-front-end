@@ -40,6 +40,7 @@ export default function SuperChart({ params }) {
     })
 
     useEffect(function renderChart() {
+        // chart only need to render the first time, the rest is update series data
         if (chartContainerRef.current && !chartInstanceRef.current) {
             chartOptions.title.text = `${params.symbol} - ${params.timeframe}`
             chartInstanceRef.current = new ApexCharts(
