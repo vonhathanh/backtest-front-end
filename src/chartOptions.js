@@ -31,7 +31,8 @@ const chartOptions = {
     yaxis: {
         opposite: true,
         decimalsInFloat: 1,
-    }
+    },
+    annotations: {}
 };
 
 export default chartOptions
