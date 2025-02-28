@@ -5,6 +5,7 @@ import chartOptions from "../chartOption"
 import { useEffect, useRef, useState } from "react"
 import ApexCharts from "apexcharts"
 import PositionsTable from "./PositionsTable"
+import OrdersTable from "./OrdersTable"
 import Tab from "./Tab"
 
 export default function SuperChart({ params }) {
@@ -76,7 +77,7 @@ export default function SuperChart({ params }) {
             </section>
 
             {currentTab === 'positions' && <PositionsTable price={prices[prices.length - 1]?.y[0]} positions={positions} />}
-            {/* {currentTab === 'openOrders' && <OrdersTable data={openOrders} />} */}
+            {currentTab === 'openOrders' && <OrdersTable orders={openOrders} />}
         </>
     )
 }
