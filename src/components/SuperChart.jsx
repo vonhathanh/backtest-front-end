@@ -1,7 +1,7 @@
 import useWebSocket from "react-use-websocket"
 
 import config from "../config"
-import chartOptions from "../chartOption"
+import chartOptions from "../chartOptions"
 import { useEffect, useRef, useState } from "react"
 import ApexCharts from "apexcharts"
 import PositionsTable from "./PositionsTable"
@@ -27,15 +27,17 @@ export default function SuperChart({ params }) {
         },
         onMessage: (event) => {
             const eventData = JSON.parse(event.data)
+            if (eventData.type !== "update") return
 
-            if (eventData.type === "update") {
-                updateChartData(eventData.message.price)
-                updateAccountInfo(eventData.message)
-                sendJsonMessage({
-                    "type": "notification",
-                    "message": "frontend_updated",
-                })
-            }
+            updateChartData(eventData.message)
+            updateStrategyInfo(eventData.message)
+
+            drawAnnotations()
+
+            sendJsonMessage({
+                "type": "notification",
+                "message": "frontend_updated",
+            })
         }
     })
 
@@ -52,20 +54,32 @@ export default function SuperChart({ params }) {
     }, [])
 
     function updateChartData(message) {
+        const price = message.price
         const candle = {
-            x: message.open_time,
-            y: [message.open, message.high, message.low, message.close]
+            x: price.open_time,
+            y: [price.open, price.high, price.low, price.close]
         }
-
+        
         setPrices((prevCandles) => [...prevCandles.slice(-config.maxCandlesOnPage), candle])
-
         chartInstanceRef.current.updateSeries([{ name: "candlestick", data: prices }])
     }
 
-
-    function updateAccountInfo(message) {
+    function updateStrategyInfo(message) {
         setPositions(message.positions)
         setOpenOrders(message.orders)
+    }
+
+    function drawAnnotations() {
+        if (openOrders.length == 0) return 
+
+        chartInstanceRef.current.clearAnnotations()
+
+        openOrders.map(order => {
+            chartInstanceRef.current.addYaxisAnnotation({
+                y: order.price,
+                borderColor: order.side === 'BUY' ? '#00E396' : '#F72411',
+            })
+        })
     }
 
     return (
