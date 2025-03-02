@@ -7,7 +7,7 @@ export default function DateTimeInput({ label, config, onChange, value }) {
 
     return (
         <section>
-            <label htmlFor={label}>{label}</label><br />
+            <label>{label}</label><br />
             <input
                 type="date"
                 disabled={config ? "" : "disabled"}
