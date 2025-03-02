@@ -1,17 +1,19 @@
 import Input from "./Input";
 import DateTimeInput from "./DateTimeInput";
 import ManualMode from "./ManualMode";
-import Label from "./Label";
 import { useState } from "react";
 
 export default function GeneralConfig({ metadata }) {
     const [startTime, setStartTime] = useState("")
     const [endTime, setEndTime] = useState("")
 
+    const symbol = metadata? `: ${metadata.symbol}`: ""
+    const timeframe = metadata? `: ${metadata.tf}`: ""
+
     return (
         <section className="config-group">
-            <Label text="Symbol" value={metadata?.symbol || ""} />
-            <Label text="Timeframe" value={metadata?.tf || ""} />
+            <label>Symbol{symbol} </label>
+            <label>Timeframe{timeframe}</label>
 
             <DateTimeInput
                 label="Start time"
