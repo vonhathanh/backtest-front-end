@@ -18,6 +18,7 @@ export default function Config() {
 
   const navigate = useNavigate();
 
+  // useCallback because this function is a dependency of useEffect() in FileSelection.jsx
   const handleFileSelection = useCallback((data) => {
     setMetadata(data)
   }, [])
