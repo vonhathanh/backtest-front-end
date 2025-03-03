@@ -7,6 +7,8 @@
 
 ## Development
 
+- Create new .env.local file from .env and add values for all variables in that file
+
 `npm run dev`
 
 ## Production
