@@ -5,7 +5,6 @@ import OrdersTable from "./OrdersTable";
 import Tab from "./Tab";
 
 export default function AccountInfo({ price, positions, openOrders }) {
-  console.log("positions ", positions);
   const [currentTab, setcurrentTab] = useState("positions");
 
   return (
