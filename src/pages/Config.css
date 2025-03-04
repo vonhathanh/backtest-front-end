@@ -141,7 +141,7 @@ input:focus {
 }
 
 .toogle-switch input:checked + .slider::before {
-  transform: translate(23px);
+  transform: translate(25px);
 }
 
 #strategies {
