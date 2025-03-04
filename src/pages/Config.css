@@ -64,7 +64,7 @@ button:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 20px;
-  row-gap: 10px;
+  row-gap: 15px;
   margin-top: 15px;
 }
 
@@ -90,7 +90,6 @@ input:focus {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  margin-top: 20px;
 }
 
 /* Toogle switch's container*/
