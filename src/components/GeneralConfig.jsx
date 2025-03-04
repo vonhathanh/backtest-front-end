@@ -4,33 +4,35 @@ import ToogleLiveUpdate from "./ToogleLiveUpdate";
 import { useState } from "react";
 
 export default function GeneralConfig({ metadata }) {
-    const [startTime, setStartTime] = useState("")
-    const [endTime, setEndTime] = useState("")
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
-    const symbol = metadata? `: ${metadata.symbol}`: ""
-    const timeframe = metadata? `: ${metadata.tf}`: ""
+  const symbol = metadata ? `: ${metadata.symbol}` : "";
+  const timeframe = metadata ? `: ${metadata.tf}` : "";
 
-    return (
-        <section className="config-group">
-            <label>Symbol{symbol} </label>
-            <label>Timeframe{timeframe}</label>
+  return (
+    <section className="config-group">
+      <label>Symbol{symbol} </label>
+      <label>Timeframe{timeframe}</label>
 
-            <DateTimeInput
-                label="Start time"
-                config={metadata}
-                onChange={(value) => setStartTime(value)}
-                value={startTime}
-            />
-            <DateTimeInput
-                label="End time"
-                config={metadata}
-                onChange={(value) => setEndTime(value)}
-                value={endTime}
-            />
+      <DateTimeInput
+        label="Start time"
+        config={metadata}
+        onChange={(value) => setStartTime(value)}
+        value={startTime}
+      />
+      <DateTimeInput
+        label="End time"
+        config={metadata}
+        onChange={(value) => setEndTime(value)}
+        value={endTime}
+      />
 
-            <Input label="Initial Balance" type="number" defaultValue={100000} />
+      <Input label="Initial Balance" type="number" defaultValue={100000} />
 
-            <ToogleLiveUpdate />
-        </section>
-    );
+      <Input label="Delay Between Candles" type="number" defaultValue="0" />
+
+      <ToogleLiveUpdate />
+    </section>
+  );
 }

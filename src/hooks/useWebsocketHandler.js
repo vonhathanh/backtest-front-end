@@ -14,11 +14,12 @@ export default function useWebsockethandler(params, onMessage) {
       if (eventData.type !== "update") return;
 
       onMessage(eventData.message);
-
-      sendJsonMessage({
-        type: "notification",
-        message: "frontend_updated",
-      });
+      setTimeout(() => {
+        sendJsonMessage({
+          type: "notification",
+          message: "frontend_updated",
+        });
+      }, params.delay * 1000);
     },
   });
 }
