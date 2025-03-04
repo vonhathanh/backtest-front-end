@@ -1,6 +1,6 @@
 import Input from "./Input";
 import DateTimeInput from "./DateTimeInput";
-import ManualMode from "./ManualMode";
+import ToogleLiveUpdate from "./ToogleLiveUpdate";
 import { useState } from "react";
 
 export default function GeneralConfig({ metadata }) {
@@ -30,7 +30,7 @@ export default function GeneralConfig({ metadata }) {
 
             <Input label="Initial Balance" type="number" defaultValue={100000} />
 
-            <ManualMode />
+            <ToogleLiveUpdate />
         </section>
     );
 }

@@ -5,23 +5,22 @@ import FileSelection from "../components/FileSelection";
 import GeneralConfig from "../components/GeneralConfig";
 import StrategiesContainer from "../components/StrategiesContainer";
 
-import "./Config.css"
+import "./Config.css";
 import { strategyReducer } from "../reducers/strategyReducer";
 
-export const StrategyContext = createContext({})
+export const StrategyContext = createContext({});
 
 export default function Config() {
+  const [metadata, setMetadata] = useState(null);
 
-  const [metadata, setMetadata] = useState(null)
-
-  const [strategies, dispatch] = useReducer(strategyReducer, {})
+  const [strategies, dispatch] = useReducer(strategyReducer, {});
 
   const navigate = useNavigate();
 
   // useCallback because this function is a dependency of useEffect() in FileSelection.jsx
   const handleFileSelection = useCallback((data) => {
-    setMetadata(data)
-  }, [])
+    setMetadata(data);
+  }, []);
 
   function handleSubmit(formData) {
     const backtestParams = {
@@ -31,10 +30,13 @@ export default function Config() {
         startTime: formData.get("Start time"),
         endTime: formData.get("End time"),
         initialBalance: Number(formData.get("Initial Balance")),
+        allowLiveUpdates: formData.get("live-updates") || false,
       },
-      strategies: Object.entries(strategies)
-    }
-    navigate("/backtest", { state: backtestParams })
+      strategies: Object.entries(strategies),
+    };
+    console.log(backtestParams);
+
+    navigate("/backtest", { state: backtestParams });
   }
 
   return (
@@ -52,8 +54,10 @@ export default function Config() {
           </StrategyContext.Provider>
         </div>
 
-        <button id="start-btn" type="submit" >Start testing</button>
+        <button id="start-btn" type="submit">
+          Start testing
+        </button>
       </form>
     </main>
-  )
+  );
 }
