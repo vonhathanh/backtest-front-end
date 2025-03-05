@@ -29,7 +29,7 @@ export default function CandlestickChart({ params, prices, openOrders }) {
   }
 
   function drawAnnotations() {
-    if (openOrders.length == 0 || !chartInstanceRef.current) return;
+    if (!chartInstanceRef.current) return;
 
     chartInstanceRef.current.clearAnnotations();
 
