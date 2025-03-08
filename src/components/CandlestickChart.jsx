@@ -3,7 +3,12 @@ import { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
 import chartOptions from "../chartOptions";
 
-export default function CandlestickChart({ params, prices, openOrders }) {
+export default function CandlestickChart({
+  params,
+  prices,
+  openOrders,
+  socket,
+}) {
   const chartContainerRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
@@ -14,7 +19,8 @@ export default function CandlestickChart({ params, prices, openOrders }) {
     chartInstanceRef.current.updateSeries([
       { name: "candlestick", data: prices },
     ]);
-  }, [prices]);
+    if (socket) socket.emit("render_finished", {});
+  }, [prices, socket]);
 
   function renderChart() {
     // chart only need to render the first time, the rest is update series data
