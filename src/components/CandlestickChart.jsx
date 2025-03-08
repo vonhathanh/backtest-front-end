@@ -19,8 +19,10 @@ export default function CandlestickChart({
     chartInstanceRef.current.updateSeries([
       { name: "candlestick", data: prices },
     ]);
-    if (socket) socket.emit("render_finished", {});
-  }, [prices, socket]);
+    setTimeout(() => {
+      if (socket) socket.emit("render_finished", {});
+    }, params.delay * 1000);
+  }, [params.delay, prices, socket]);
 
   function renderChart() {
     // chart only need to render the first time, the rest is update series data
