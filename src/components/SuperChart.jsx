@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import config from "../config";
 
@@ -11,35 +11,44 @@ export default function SuperChart({ params }) {
   const [positions, setPositions] = useState([]);
   const [openOrders, setOpenOrders] = useState([]);
 
-  const socket = useSocketIO();
+  const { socket, isConnected } = useSocketIO();
 
-  socket.on("connect", () => {
-    console.log(socket.id);
-    socket.emit("backtest", params);
-  });
+  useEffect(() => {
+    if (!isConnected) return;
 
-  socket.on("new_candle", (price) => {
-    const candle = {
-      x: price.open_time,
-      y: [price.open, price.high, price.low, price.close],
-    };
-    setPrices((prevCandles) => [
-      ...prevCandles.slice(-config.maxCandlesOnPage),
-      candle,
-    ]);
-  });
+    socket.on("new_candle", (price) => {
+      const candle = {
+        x: price.open_time,
+        y: [price.open, price.high, price.low, price.close],
+      };
+      setPrices((prevCandles) => [
+        ...prevCandles.slice(-config.maxCandlesOnPage),
+        candle,
+      ]);
+    });
 
-  socket.on("new_orders", (newOrders) => {
-    setOpenOrders((prevOrders) => [...prevOrders, ...newOrders]);
-  });
+    socket.on("new_orders", (newOrders) => {
+      setOpenOrders((prevOrders) => [...prevOrders, ...newOrders]);
+    });
 
-  socket.on("current_orders", (newOrders) => {
-    setOpenOrders(newOrders);
-  });
+    socket.on("current_orders", (newOrders) => {
+      setOpenOrders(newOrders);
+    });
 
-  socket.on("positions", (newPositions) => {
-    setPositions(newPositions);
-  });
+    socket.on("order_filled", (filledOrder) => {
+      setOpenOrders((prevOrders) =>
+        prevOrders.filter((order) => order.id !== filledOrder.id)
+      );
+    });
+
+    socket.on("positions", (newPositions) => {
+      setPositions(newPositions);
+    });
+  }, [socket, isConnected]);
+
+  useEffect(() => {
+    if (socket && isConnected && params) socket.emit("backtest", params);
+  }, [socket, isConnected, params]);
 
   return (
     <>
@@ -47,6 +56,7 @@ export default function SuperChart({ params }) {
         prices={prices}
         openOrders={openOrders}
         params={params}
+        socket={socket}
       />
       <AccountInfo
         price={prices.slice(-1)}
