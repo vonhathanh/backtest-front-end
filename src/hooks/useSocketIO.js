@@ -3,23 +3,29 @@ import { io } from "socket.io-client";
 import config from "../config";
 
 export default function useSocketIO() {
-  //   const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
 
-  const socket = io(config.socketioURL, {
-    transports: ["websocket"],
-    withCredentials: false,
-  });
+  useEffect(() => {
+    const sio = io(config.socketioURL, {
+      transports: ["websocket"],
+      withCredentials: false,
+      reconnection: false,
+    });
+    setSocket(sio);
 
-  //   useEffect(() => {
-  //     console.log("useEffect");
-  //     const sio = io(config.socketioURL, {
-  //       transports: ["websocket"],
-  //       withCredentials: false,
-  //     });
-  //     setSocket(sio);
+    sio.on("connect", () => {
+      console.log("connected", sio.id);
+      setIsConnected(true);
+    });
 
-  //     return () => sio.close();
-  //   }, []);
+    sio.on("disconnect", () => {
+      console.log("disconnected", sio.id);
+      setIsConnected(false);
+    });
 
-  return socket;
+    return () => sio.close();
+  }, []);
+
+  return { socket, isConnected };
 }
