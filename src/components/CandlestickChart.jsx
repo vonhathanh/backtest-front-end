@@ -13,7 +13,7 @@ export default function CandlestickChart({
   const chartInstanceRef = useRef(null);
 
   useEffect(renderChart, [params]);
-  useEffect(drawAnnotations, [openOrders]);
+  useEffect(drawOpenOrders, [openOrders]);
 
   useEffect(() => {
     chartInstanceRef.current.updateSeries([
@@ -34,7 +34,7 @@ export default function CandlestickChart({
     }
   }
 
-  function drawAnnotations() {
+  function drawOpenOrders() {
     if (!chartInstanceRef.current) return;
 
     chartInstanceRef.current.clearAnnotations();

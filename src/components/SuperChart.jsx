@@ -13,7 +13,14 @@ export default function SuperChart({ params }) {
 
   const { socket, isConnected } = useSocketIO();
 
+  useEffect(setuphandlers, [socket, isConnected]);
+
+  // emit backtest event once socket is connected and params are loaded
   useEffect(() => {
+    if (isConnected && params) socket.emit("backtest", params);
+  }, [socket, isConnected, params]);
+
+  function setuphandlers() {
     if (!isConnected) return;
 
     socket.on("new_candle", (price) => {
@@ -44,11 +51,7 @@ export default function SuperChart({ params }) {
     socket.on("positions", (newPositions) => {
       setPositions(newPositions);
     });
-  }, [socket, isConnected]);
-
-  useEffect(() => {
-    if (socket && isConnected && params) socket.emit("backtest", params);
-  }, [socket, isConnected, params]);
+  }
 
   return (
     <>

@@ -6,12 +6,13 @@ export default function useSocketIO() {
   const [socket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  useEffect(() => {
+  useEffect(function setupSocketio() {
     const sio = io(config.socketioURL, {
       transports: ["websocket"],
       withCredentials: false,
       reconnection: false,
     });
+
     setSocket(sio);
 
     sio.on("connect", () => {
