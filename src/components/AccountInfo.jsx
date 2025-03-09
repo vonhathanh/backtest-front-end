@@ -26,7 +26,7 @@ export default function AccountInfo({ price, positions, openOrders }) {
 
       {currentTab === "positions" && (
         <PositionsTable
-          price={price.length > 0 ? price[0].y[0] : 0.0}
+          price={price.length > 0 ? price[0].y[3] : 0.0}
           positions={positions}
         />
       )}
