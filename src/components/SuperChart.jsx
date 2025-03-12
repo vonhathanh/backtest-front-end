@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-import config from "../config";
-
 import CandlestickChart from "./CandlestickChart";
 import AccountInfo from "./AccountInfo";
 import useSocketIO from "../hooks/useSocketIO";
@@ -13,7 +11,7 @@ export default function SuperChart({ params }) {
 
   const { socket, isConnected } = useSocketIO();
 
-  useEffect(setuphandlers, [socket, isConnected]);
+  useEffect(setuphandlers, [isConnected, socket]);
 
   // emit backtest event once socket is connected and params are loaded
   useEffect(() => {
@@ -24,14 +22,7 @@ export default function SuperChart({ params }) {
     if (!isConnected) return;
 
     socket.on("new_candle", (price) => {
-      const candle = {
-        x: price.open_time,
-        y: [price.open, price.high, price.low, price.close],
-      };
-      setPrices((prevCandles) => [
-        ...prevCandles.slice(-config.maxCandlesOnPage),
-        candle,
-      ]);
+      setPrices((prevCandles) => [...prevCandles, price]);
     });
 
     socket.on("new_orders", (newOrders) => {
@@ -56,13 +47,13 @@ export default function SuperChart({ params }) {
   return (
     <>
       <CandlestickChart
-        prices={prices}
+        price={prices ? prices[prices.length - 1] : null}
         openOrders={openOrders}
         params={params}
         socket={socket}
       />
       <AccountInfo
-        price={prices.slice(-1)}
+        price={prices ? prices[prices.length - 1] : null}
         positions={positions}
         openOrders={openOrders}
       />
