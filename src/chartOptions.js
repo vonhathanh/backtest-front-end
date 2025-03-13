@@ -1,37 +1,10 @@
-import dayjs from "dayjs"
-
 const chartOptions = {
-    series: [{
-        data: []
-    }],
-    noData: {
-        text: 'Loading...'
-    },
-    chart: {
-        type: 'candlestick',
-        height: 450
-    },
-    title: {
-        text: '',
-        align: 'left',
-        style: {
-            fontSize: '26px',
-            fontWeight: 'bold',
-            fontFamily: 'sans-serif'
-        }
-    },
-    xaxis: {
-        type: 'category',
-        labels: {
-            formatter: function (val) {
-                return dayjs(val).format("YYYY/MM/DD")
-            }
-        }
-    },
-    yaxis: {
-        opposite: true,
-        decimalsInFloat: 1,
-    },
+  upColor: "#26a69a",
+  downColor: "#ef5350",
+  borderVisible: true,
+  wickUpColor: "#26a69a",
+  wickDownColor: "#ef5350",
+  priceLineVisible: false,
 };
 
-export default chartOptions
+export default chartOptions;

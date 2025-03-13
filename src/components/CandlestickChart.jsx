@@ -4,8 +4,7 @@ import {
   createChart,
   createSeriesMarkers,
 } from "lightweight-charts";
-
-// import chartOptions from "../chartOptions";
+import chartOptions from "../chartOptions";
 
 export default function CandlestickChart({
   params,
@@ -31,14 +30,10 @@ export default function CandlestickChart({
       height: 450,
     });
     chartInstanceRef.current.timeScale().fitContent();
-    series.current = chartInstanceRef.current.addSeries(CandlestickSeries, {
-      upColor: "#26a69a",
-      downColor: "#ef5350",
-      borderVisible: true,
-      wickUpColor: "#26a69a",
-      wickDownColor: "#ef5350",
-      priceLineVisible: false,
-    });
+    series.current = chartInstanceRef.current.addSeries(
+      CandlestickSeries,
+      chartOptions
+    );
     series.current.setData([]);
 
     seriesMarkers.current = createSeriesMarkers(series.current, []);
