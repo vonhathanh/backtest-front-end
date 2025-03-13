@@ -27,6 +27,7 @@ export default function CandlestickChart({
     if (chartInstanceRef.current) return;
     // chart only need to render the first time, the rest is update series data
     chartInstanceRef.current = createChart(chartContainerRef.current, {
+      width: window.innerWidth,
       height: 450,
     });
     chartInstanceRef.current.timeScale().fitContent();
@@ -62,7 +63,7 @@ export default function CandlestickChart({
         lineWidth: 2,
         lineStyle: 2, // LineStyle.Dashed
         axisLabelVisible: true,
-        title: "my label",
+        title: order.id,
       };
       series.current.createPriceLine(priceLine);
     });
