@@ -8,10 +8,11 @@ export default function SuperChart({ params }) {
   const [prices, setPrices] = useState([]);
   const [positions, setPositions] = useState([]);
   const [openOrders, setOpenOrders] = useState([]);
+  const [filledOrders, setFilledOrders] = useState([]);
 
   const { socket, isConnected } = useSocketIO();
 
-  useEffect(setuphandlers, [isConnected, socket]);
+  useEffect(setuphandlers, [isConnected, socket, filledOrders]);
 
   // emit backtest event once socket is connected and params are loaded
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function SuperChart({ params }) {
       setOpenOrders((prevOrders) =>
         prevOrders.filter((order) => order.id !== filledOrder.id)
       );
+      setFilledOrders([...filledOrders, filledOrder]);
     });
 
     socket.on("positions", (newPositions) => {
@@ -48,6 +50,7 @@ export default function SuperChart({ params }) {
     <>
       <CandlestickChart
         price={prices ? prices[prices.length - 1] : null}
+        filledOrders={filledOrders}
         openOrders={openOrders}
         params={params}
         socket={socket}

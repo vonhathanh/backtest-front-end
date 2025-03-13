@@ -1,5 +1,9 @@
 import { useEffect, useRef } from "react";
-import { CandlestickSeries, createChart } from "lightweight-charts";
+import {
+  CandlestickSeries,
+  createChart,
+  createSeriesMarkers,
+} from "lightweight-charts";
 
 // import chartOptions from "../chartOptions";
 
@@ -7,15 +11,18 @@ export default function CandlestickChart({
   params,
   price,
   openOrders,
+  filledOrders,
   socket,
 }) {
   const chartContainerRef = useRef();
   const chartInstanceRef = useRef();
   const series = useRef();
+  const seriesMarkers = useRef();
 
   useEffect(initChart, [params.delay, socket]);
-  // useEffect(drawOpenOrders, [openOrders]);
+  useEffect(drawOpenOrders, [openOrders]);
   useEffect(updateChart, [params.delay, price, socket]);
+  useEffect(updateMarkers, [filledOrders]);
 
   function initChart() {
     if (chartInstanceRef.current) return;
@@ -27,11 +34,18 @@ export default function CandlestickChart({
     series.current = chartInstanceRef.current.addSeries(CandlestickSeries, {
       upColor: "#26a69a",
       downColor: "#ef5350",
-      borderVisible: false,
+      borderVisible: true,
       wickUpColor: "#26a69a",
       wickDownColor: "#ef5350",
+      priceLineVisible: false,
     });
     series.current.setData([]);
+
+    seriesMarkers.current = createSeriesMarkers(series.current, []);
+
+    window.addEventListener("resize", () => {
+      chartInstanceRef.current.resize(window.innerWidth, 450);
+    });
   }
 
   function updateChart() {
@@ -40,18 +54,46 @@ export default function CandlestickChart({
     setTimeout(() => socket.emit("render_finished", {}), params.delay * 1000);
   }
 
-  // function drawOpenOrders() {
-  //   if (!chartInstanceRef.current) return;
+  function drawOpenOrders() {
+    if (!chartInstanceRef.current) return;
 
-  //   chartInstanceRef.current.clearAnnotations();
+    const oldLines = series.current.priceLines();
+    oldLines.map((line) => series.current.removePriceLine(line));
 
-  //   openOrders.map((order) => {
-  //     chartInstanceRef.current.addYaxisAnnotation({
-  //       y: order.price,
-  //       borderColor: order.side === "BUY" ? "#00E396" : "#F72411",
-  //     });
-  //   });
-  // }
+    openOrders.map((order) => {
+      const priceLine = {
+        price: order.price,
+        color: order.side === "BUY" ? "#00E396" : "#F72411",
+        lineWidth: 2,
+        lineStyle: 2, // LineStyle.Dashed
+        axisLabelVisible: true,
+        title: "my label",
+      };
+      series.current.createPriceLine(priceLine);
+    });
+  }
 
-  return <div ref={chartContainerRef}></div>;
+  function updateMarkers() {
+    if (!chartInstanceRef.current) return;
+    const markers = filledOrders.map((order) => {
+      if (order.side === "BUY") {
+        return {
+          color: "green",
+          position: "aboveBar",
+          shape: "arrowDown",
+          time: order.createdAt,
+        };
+      } else {
+        return {
+          color: "red",
+          position: "belowBar",
+          shape: "arrowUp",
+          time: order.createdAt,
+        };
+      }
+    });
+    seriesMarkers.current.setMarkers(markers);
+  }
+
+  return <section id="candlestick-chart" ref={chartContainerRef}></section>;
 }

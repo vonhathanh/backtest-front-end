@@ -1,43 +1,50 @@
 main.backtest {
-    width: 100%;
-    height: 100%;
-    min-width: 100vw;
+  width: 100%;
+  height: 100%;
+  min-width: 100vw;
 }
 
 #account-info {
-    display: flex;
-    margin-left: 10px;
-    margin-right: 10px;
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-
 .tab {
-    font-weight: bold;
-    border-radius: 0;
-    display: inline-block;
-    width: 100%;
+  font-weight: bold;
+  border-radius: 0;
+  display: inline-block;
+  width: 100%;
 }
 
 table {
-    margin: 10px 10px;
-    width: calc(100% - 20px);
-    text-align: left;
+  margin: 10px 10px;
+  width: calc(100% - 20px);
+  text-align: left;
 }
 
-
-table, th, td {
-    border: 1px solid black;
-    border-spacing: 0;
+table,
+th,
+td {
+  border: 1px solid black;
+  border-spacing: 0;
 }
 
-th, td {
-    padding: 5px;
+th,
+td {
+  padding: 5px;
 }
 
-#positions-table > th, td {
-    width: 20%
+#positions-table > th,
+td {
+  width: 20%;
 }
 
-#orders-table > th, td {
-    width: 16%
+#orders-table > th,
+td {
+  width: 16%;
 }
+
+/* #candlestick-chart {
+  margin-bottom: 50px;
+} */
