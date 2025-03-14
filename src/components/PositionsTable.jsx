@@ -19,7 +19,7 @@ export default function PositionsTable({ positions, price }) {
   });
 
   return (
-    <table id="positions-table">
+    <table id="positions-table" className="info-table">
       <thead>
         <tr>
           <th>Side</th>
