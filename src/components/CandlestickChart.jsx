@@ -40,7 +40,10 @@ export default function CandlestickChart({
     seriesMarkers.current = createSeriesMarkers(series.current, []);
 
     window.addEventListener("resize", () => {
-      chartInstanceRef.current.resize(window.innerWidth, 450);
+      chartInstanceRef.current.resize(
+        chartContainerRef.current.innerWidth,
+        450
+      );
     });
   }
 
