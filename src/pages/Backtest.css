@@ -17,30 +17,27 @@ main.backtest {
   width: 100%;
 }
 
-table {
+.info-table {
   margin: 10px 10px;
   width: calc(100% - 20px);
   text-align: left;
-}
-
-table,
-th,
-td {
   border: 1px solid black;
   border-spacing: 0;
 }
 
-th,
-td {
+.info-table th,
+.info-table td {
+  border: 1px solid black;
+  border-spacing: 0;
   padding: 5px;
 }
 
-#positions-table > th,
-td {
+#positions-table th,
+#positions-table td {
   width: 20%;
 }
 
-#orders-table > th,
-td {
+#orders-table th,
+#orders-table td {
   width: 16%;
 }
