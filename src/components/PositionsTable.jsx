@@ -13,7 +13,6 @@ export default function PositionsTable({ positions, price }) {
         <td>{position.quantity.toFixed(2)}</td>
         <td>{position.averagePrice.toFixed(2)}</td>
         <td>{pnl}</td>
-        <td>Close</td>
       </tr>
     );
   });
@@ -26,7 +25,6 @@ export default function PositionsTable({ positions, price }) {
           <th>Quantity</th>
           <th>Average Price</th>
           <th>PNL</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
