@@ -47,7 +47,7 @@ export default function SuperChart({ params }) {
   }
 
   return (
-    <>
+    <section className="super-chart">
       <CandlestickChart
         price={prices ? prices[prices.length - 1] : null}
         filledOrders={filledOrders}
@@ -60,6 +60,6 @@ export default function SuperChart({ params }) {
         positions={positions}
         openOrders={openOrders}
       />
-    </>
+    </section>
   );
 }
