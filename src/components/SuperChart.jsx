@@ -12,7 +12,7 @@ export default function SuperChart({ params }) {
 
   const { socket, isConnected } = useSocketIO();
 
-  useEffect(setuphandlers, [isConnected, socket, filledOrders]);
+  useEffect(setuphandlers, [isConnected, socket]);
 
   // emit backtest event once socket is connected and params are loaded
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function SuperChart({ params }) {
       setOpenOrders((prevOrders) =>
         prevOrders.filter((order) => order.id !== filledOrder.id)
       );
-      setFilledOrders([...filledOrders, filledOrder]);
+      setFilledOrders((prevOrders) => [...prevOrders, filledOrder]);
     });
 
     socket.on("positions", (newPositions) => {
