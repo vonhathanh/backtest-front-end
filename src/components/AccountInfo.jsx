@@ -8,7 +8,7 @@ export default function AccountInfo({ price, positions, openOrders }) {
   const [currentTab, setcurrentTab] = useState("positions");
 
   return (
-    <>
+    <section>
       <section id="account-info">
         <Tab
           currentTab={currentTab}
@@ -31,6 +31,6 @@ export default function AccountInfo({ price, positions, openOrders }) {
         />
       )}
       {currentTab === "openOrders" && <OrdersTable orders={openOrders} />}
-    </>
+    </section>
   );
 }
