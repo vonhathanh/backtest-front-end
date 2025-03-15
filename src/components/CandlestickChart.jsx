@@ -20,7 +20,7 @@ export default function CandlestickChart({
 
   useEffect(() => initChart(), [params.delay, socket]);
   useEffect(drawOpenOrders, [openOrders]);
-  useEffect(updateChart, [params.delay, price, socket]);
+  useEffect(updateChart, [params.delay, params.stepByStep, price, socket]);
   useEffect(updateMarkers, [filledOrders]);
 
   function initChart() {
@@ -59,7 +59,8 @@ export default function CandlestickChart({
   function updateChart() {
     if (!price) return;
     series.current.update(price);
-    setTimeout(() => socket.emit("render_finished", {}), params.delay * 1000);
+    if (!params.stepByStep)
+      setTimeout(() => socket.emit("render_finished", {}), params.delay * 1000);
   }
 
   function drawOpenOrders() {

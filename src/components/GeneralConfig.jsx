@@ -1,6 +1,6 @@
 import Input from "./Input";
 import DateTimeInput from "./DateTimeInput";
-import ToogleLiveUpdate from "./ToogleLiveUpdate";
+import ToogleButtonWithLabel from "./ToogleButtonWithLabel";
 import { useState } from "react";
 
 export default function GeneralConfig({ metadata }) {
@@ -32,7 +32,8 @@ export default function GeneralConfig({ metadata }) {
 
       <Input label="Delay Between Candles" type="number" defaultValue="0" />
 
-      <ToogleLiveUpdate />
+      <ToogleButtonWithLabel label="Live Update" value="live-updates" />
+      <ToogleButtonWithLabel label="Step by Step" value="step-by-step" />
     </section>
   );
 }

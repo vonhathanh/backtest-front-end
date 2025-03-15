@@ -31,6 +31,7 @@ export default function Config() {
         endTime: formData.get("End time"),
         initialBalance: Number(formData.get("Initial Balance")),
         allowLiveUpdates: formData.get("live-updates") || false,
+        stepByStep: formData.get("step-by-step") || false,
         delay: Number(formData.get("Delay Between Candles")),
       },
       strategies: Object.entries(strategies),

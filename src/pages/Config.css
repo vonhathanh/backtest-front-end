@@ -85,7 +85,7 @@ input:focus {
   outline: none;
 }
 
-#live-update {
+.toogle-button-with-label {
   display: flex;
   justify-content: space-between;
   align-items: center;
