@@ -18,19 +18,27 @@ export default function CandlestickChart({
   const series = useRef();
   const seriesMarkers = useRef();
 
-  useEffect(initChart, [params.delay, socket]);
+  useEffect(() => initChart(), [params.delay, socket]);
   useEffect(drawOpenOrders, [openOrders]);
   useEffect(updateChart, [params.delay, price, socket]);
   useEffect(updateMarkers, [filledOrders]);
 
   function initChart() {
     if (chartInstanceRef.current) return;
+
+    const handleResize = () => {
+      if (!chartInstanceRef.current) return;
+      chartInstanceRef.current.applyOptions({
+        width: chartContainerRef.current.clientWidth,
+        height: chartContainerRef.current.clientHeight,
+      });
+    };
+
     // chart only need to render the first time, the rest is update series data
-    chartInstanceRef.current = createChart(chartContainerRef.current, {
-      width: window.innerWidth,
-      height: 450,
-    });
+    chartInstanceRef.current = createChart(chartContainerRef.current);
+
     chartInstanceRef.current.timeScale().fitContent();
+
     series.current = chartInstanceRef.current.addSeries(
       CandlestickSeries,
       chartOptions
@@ -39,12 +47,13 @@ export default function CandlestickChart({
 
     seriesMarkers.current = createSeriesMarkers(series.current, []);
 
-    window.addEventListener("resize", () => {
-      chartInstanceRef.current.resize(
-        chartContainerRef.current.innerWidth,
-        450
-      );
-    });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      chartInstanceRef.current?.remove();
+      chartInstanceRef.current = null;
+    };
   }
 
   function updateChart() {
@@ -65,7 +74,7 @@ export default function CandlestickChart({
         color: order.side === "BUY" ? "#00E396" : "#F72411",
         lineWidth: 2,
         lineStyle: 2, // LineStyle.Dashed
-        axisLabelVisible: true,
+        axisLabelVisible: false,
         title: order.id,
       };
       series.current.createPriceLine(priceLine);
