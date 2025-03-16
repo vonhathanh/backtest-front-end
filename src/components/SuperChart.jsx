@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CandlestickChart from "./CandlestickChart";
 import AccountInfo from "./AccountInfo";
 import useSocketIO from "../hooks/useSocketIO";
+import ChartHeader from "./ChartHeader";
 
 export default function SuperChart({ params }) {
   const [prices, setPrices] = useState([]);
@@ -35,9 +36,7 @@ export default function SuperChart({ params }) {
     });
 
     socket.on("order_filled", (filledOrder) => {
-      setOpenOrders((prevOrders) =>
-        prevOrders.filter((order) => order.id !== filledOrder.id)
-      );
+      setOpenOrders((prevOrders) => prevOrders.filter((order) => order.id !== filledOrder.id));
       setFilledOrders((prevOrders) => [...prevOrders, filledOrder]);
     });
 
@@ -48,6 +47,7 @@ export default function SuperChart({ params }) {
 
   return (
     <section className="super-chart">
+      <ChartHeader params={params} socket={socket} />
       <CandlestickChart
         price={prices ? prices[prices.length - 1] : null}
         filledOrders={filledOrders}
