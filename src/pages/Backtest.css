@@ -22,8 +22,9 @@ main.backtest {
   align-items: center;
 }
 
-.next-btn {
+.next-btn-div > button {
   width: 100px;
+  background-color: #ccc;
 }
 
 #account-info {
@@ -53,8 +54,10 @@ main.backtest {
   z-index: 1;
 }
 
-#candlestick-chart table {
+#candlestick-chart {
+  width: calc(100% - 40px);
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 .info-table {

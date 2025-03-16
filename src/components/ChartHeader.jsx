@@ -6,9 +6,7 @@ export default function ChartHeader({ params, socket }) {
       </span>
       <div className="next-btn-div">
         {params.stepByStep ? (
-          <button className="next-btn" onClick={() => socket.emit("render_finished", {})}>
-            Next
-          </button>
+          <button onClick={() => socket.emit("render_finished", {})}>Next</button>
         ) : null}
       </div>
     </section>
