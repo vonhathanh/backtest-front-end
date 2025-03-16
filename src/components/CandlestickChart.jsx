@@ -1,18 +1,8 @@
 import { useEffect, useRef } from "react";
-import {
-  CandlestickSeries,
-  createChart,
-  createSeriesMarkers,
-} from "lightweight-charts";
+import { CandlestickSeries, createChart, createSeriesMarkers } from "lightweight-charts";
 import chartOptions from "../chartOptions";
 
-export default function CandlestickChart({
-  params,
-  price,
-  openOrders,
-  filledOrders,
-  socket,
-}) {
+export default function CandlestickChart({ params, price, openOrders, filledOrders, socket }) {
   const chartContainerRef = useRef();
   const chartInstanceRef = useRef();
   const series = useRef();
@@ -39,10 +29,7 @@ export default function CandlestickChart({
 
     chartInstanceRef.current.timeScale().fitContent();
 
-    series.current = chartInstanceRef.current.addSeries(
-      CandlestickSeries,
-      chartOptions
-    );
+    series.current = chartInstanceRef.current.addSeries(CandlestickSeries, chartOptions);
     series.current.setData([]);
 
     seriesMarkers.current = createSeriesMarkers(series.current, []);
