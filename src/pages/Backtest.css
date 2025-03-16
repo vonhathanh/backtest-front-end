@@ -15,10 +15,6 @@ main.backtest {
   align-items: center;
 }
 
-.chart-header span {
-  flex-shrink: 0; /* Prevent shrinking */
-}
-
 .next-btn-div {
   position: absolute;
   left: 50%;
