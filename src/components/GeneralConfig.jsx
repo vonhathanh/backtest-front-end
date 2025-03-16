@@ -32,8 +32,8 @@ export default function GeneralConfig({ metadata }) {
 
       <Input label="Delay Between Candles" type="number" defaultValue="0" />
 
-      <ToogleButtonWithLabel label="Live Update" value="live-updates" />
-      <ToogleButtonWithLabel label="Step by Step" value="step-by-step" />
+      <ToogleButtonWithLabel label="Live Update" name="live-updates" />
+      <ToogleButtonWithLabel label="Step by Step" name="step-by-step" />
     </section>
   );
 }
