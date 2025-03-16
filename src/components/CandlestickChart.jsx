@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 import { CandlestickSeries, createChart, createSeriesMarkers } from "lightweight-charts";
-import chartOptions from "../chartOptions";
+import { chartOptions, tooltipDefaultStyle } from "../chartOptions";
+import { createPriceLineFromOrder, createMarkerFromOrder, crosshairMoveHandler } from "../utils";
 
 export default function CandlestickChart({ params, price, openOrders, filledOrders, socket }) {
   const chartContainerRef = useRef();
   const chartInstanceRef = useRef();
   const series = useRef();
   const seriesMarkers = useRef();
+  const tooltip = useRef();
 
   useEffect(() => initChart(), [params.delay, socket]);
   useEffect(drawOpenOrders, [openOrders]);
@@ -36,6 +38,15 @@ export default function CandlestickChart({ params, price, openOrders, filledOrde
 
     window.addEventListener("resize", handleResize);
 
+    tooltip.current = document.createElement("div");
+    tooltip.current.style = tooltipDefaultStyle;
+
+    chartContainerRef.current.appendChild(tooltip.current);
+
+    chartInstanceRef.current.subscribeCrosshairMove((param) =>
+      crosshairMoveHandler(param, tooltip.current, series.current, chartContainerRef.current)
+    );
+
     return () => {
       window.removeEventListener("resize", handleResize);
       chartInstanceRef.current?.remove();
@@ -57,37 +68,14 @@ export default function CandlestickChart({ params, price, openOrders, filledOrde
     oldLines.map((line) => series.current.removePriceLine(line));
 
     openOrders.map((order) => {
-      const priceLine = {
-        price: order.price,
-        color: order.side === "BUY" ? "#00E396" : "#F72411",
-        lineWidth: 2,
-        lineStyle: 2, // LineStyle.Dashed
-        axisLabelVisible: false,
-        title: order.id,
-      };
+      const priceLine = createPriceLineFromOrder(order);
       series.current.createPriceLine(priceLine);
     });
   }
 
   function updateMarkers() {
     if (!chartInstanceRef.current) return;
-    const markers = filledOrders.map((order) => {
-      if (order.side === "BUY") {
-        return {
-          color: "green",
-          position: "aboveBar",
-          shape: "arrowDown",
-          time: order.createdAt,
-        };
-      } else {
-        return {
-          color: "red",
-          position: "belowBar",
-          shape: "arrowUp",
-          time: order.createdAt,
-        };
-      }
-    });
+    const markers = filledOrders.map((order) => createMarkerFromOrder(order));
     seriesMarkers.current.setMarkers(markers);
   }
 
