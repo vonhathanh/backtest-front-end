@@ -10,16 +10,19 @@ main.backtest {
   z-index: 2;
   margin-top: 10px;
   margin-left: 20px;
-  width: 100vw;
+  width: calc(100% - 40px); /* Subtract margins to prevent overflow */
   display: flex;
   align-items: center;
 }
 
+.chart-header span {
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
 .next-btn-div {
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .next-btn-div > button {
