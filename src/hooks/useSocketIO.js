@@ -16,12 +16,12 @@ export default function useSocketIO() {
     setSocket(sio);
 
     sio.on("connect", () => {
-      console.log("connected", sio.id);
+      console.log("connected to server, clientId: ", sio.id);
       setIsConnected(true);
     });
 
     sio.on("disconnect", () => {
-      console.log("disconnected", sio.id);
+      console.log("disconnected from server");
       setIsConnected(false);
     });
 
