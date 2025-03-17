@@ -1,3 +1,5 @@
+import config from "./config";
+
 export function toCamelCase(str) {
   return str
     .split(/[\s-_]+/)
@@ -38,39 +40,42 @@ export function createMarkerFromOrder(order) {
 }
 
 export function crosshairMoveHandler(param, tooltip, series, chartContainerRef) {
-  const toolTipWidth = 80;
-  const toolTipHeight = 80;
-  if (
+  if (paramIsInvalid(param, chartContainerRef)) tooltip.style.display = "none";
+  else updateTooltip(param, tooltip, series, chartContainerRef);
+}
+
+function paramIsInvalid(param, chartContainerRef) {
+  return (
     param.point === undefined ||
     !param.time ||
     param.point.x < 0 ||
     param.point.x > chartContainerRef.clientWidth ||
     param.point.y < 0 ||
     param.point.y > chartContainerRef.clientHeight
-  ) {
-    tooltip.style.display = "none";
-  } else {
-    tooltip.style.display = "block";
+  );
+}
 
-    const data = param.seriesData.get(series);
+function updateTooltip(param, tooltip, series, chartContainerRef) {
+  tooltip.style.display = "block";
 
-    tooltip.innerHTML = `
+  const data = param.seriesData.get(series);
+
+  tooltip.innerHTML = `
           Open: ${data.open.toFixed(2)}
             <br>High: ${data.high.toFixed(2)}
             <br>Low: ${data.low.toFixed(2)}
             <br>Close: ${data.close.toFixed(2)}
           `;
 
-    let x = param.point.x - toolTipWidth;
-    let y = param.point.y - toolTipHeight;
+  let x = param.point.x - config.toolTipWidth;
+  let y = param.point.y - config.toolTipHeight;
 
-    const MAX_X = chartContainerRef.clientWidth - toolTipWidth;
-    const MAX_Y = chartContainerRef.clientHeight - toolTipHeight;
+  const MAX_X = chartContainerRef.clientWidth - config.toolTipWidth;
+  const MAX_Y = chartContainerRef.clientHeight - config.toolTipHeight;
 
-    x = Math.min(Math.max(0, x), MAX_X);
-    y = Math.min(Math.max(0, y), MAX_Y);
+  x = Math.min(Math.max(0, x), MAX_X);
+  y = Math.min(Math.max(0, y), MAX_Y);
 
-    tooltip.style.left = x + "px";
-    tooltip.style.top = y + "px";
-  }
+  tooltip.style.left = x + "px";
+  tooltip.style.top = y + "px";
 }
