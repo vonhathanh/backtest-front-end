@@ -54,17 +54,40 @@ main.backtest {
 }
 
 #candlestick-chart {
-  width: calc(100% - 40px);
+  width: calc(100% - 30px);
   margin-left: 20px;
   margin-right: 20px;
 }
 
-.info-table {
+.table-container {
   margin: 10px 20px 0px 20px;
-  width: calc(100% - 40px);
+  max-height: 230px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid black;
+}
+
+.table-container table,
+.table-container th,
+.table-container td {
+  font-size: 0.95rem;
+}
+
+.info-table {
+  width: 100%;
   text-align: left;
   border: 1px solid black;
   border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.info-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: #f8f9fa;
+  border: 1px solid black;
+  box-shadow: 0 0.5px 0 0 #000;
 }
 
 .info-table th,
@@ -82,4 +105,24 @@ main.backtest {
 #orders-table th,
 #orders-table td {
   width: 20%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

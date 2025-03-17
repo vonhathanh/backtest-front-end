@@ -12,17 +12,19 @@ export default function OrdersTable({ orders }) {
   });
 
   return (
-    <table id="orders-table" className="info-table">
-      <thead>
-        <tr>
-          <th>Side</th>
-          <th>Quantity</th>
-          <th>Symbol</th>
-          <th>Entry Price</th>
-          <th>Position Side</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div className="table-container">
+      <table id="orders-table" className="info-table">
+        <thead>
+          <tr>
+            <th>Side</th>
+            <th>Quantity</th>
+            <th>Symbol</th>
+            <th>Entry Price</th>
+            <th>Position Side</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
   );
 }

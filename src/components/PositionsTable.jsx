@@ -2,9 +2,7 @@ export default function PositionsTable({ positions, price }) {
   const rows = positions.map((position, index) => {
     let pnl = 0.0;
     if (price) {
-      pnl = Number(position.quantity * (price - position.averagePrice)).toFixed(
-        2
-      );
+      pnl = Number(position.quantity * (price - position.averagePrice)).toFixed(2);
       if (position.side === "SHORT") pnl *= -1;
     }
     return (
@@ -18,16 +16,18 @@ export default function PositionsTable({ positions, price }) {
   });
 
   return (
-    <table id="positions-table" className="info-table">
-      <thead>
-        <tr>
-          <th>Side</th>
-          <th>Quantity</th>
-          <th>Average Price</th>
-          <th>PNL</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div className="table-container">
+      <table id="positions-table" className="info-table">
+        <thead>
+          <tr>
+            <th>Side</th>
+            <th>Quantity</th>
+            <th>Average Price</th>
+            <th>PNL</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
   );
 }
