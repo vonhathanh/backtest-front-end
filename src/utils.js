@@ -27,14 +27,14 @@ export function createMarkerFromOrder(order) {
       color: "green",
       position: "aboveBar",
       shape: "arrowDown",
-      time: order.createdAt,
+      time: order.filledAt,
     };
   } else {
     return {
       color: "red",
       position: "belowBar",
       shape: "arrowUp",
-      time: order.createdAt,
+      time: order.filledAt,
     };
   }
 }

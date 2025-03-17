@@ -59,6 +59,7 @@ export default function SuperChart({ params }) {
         price={prices ? prices[prices.length - 1] : null}
         positions={positions}
         openOrders={openOrders}
+        filledOrders={filledOrders}
       />
     </section>
   );

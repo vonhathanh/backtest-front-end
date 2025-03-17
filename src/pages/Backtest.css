@@ -87,7 +87,6 @@ main.backtest {
   z-index: 3;
   background-color: #f8f9fa;
   border: 1px solid black;
-  box-shadow: 0 0.5px 0 0 #000;
 }
 
 .info-table th,
@@ -105,6 +104,11 @@ main.backtest {
 #orders-table th,
 #orders-table td {
   width: 20%;
+}
+
+#order-history-table th,
+#order-history-table td {
+  width: 16%;
 }
 
 /* width */
