@@ -12,8 +12,8 @@ export default function GeneralConfig({ metadata }) {
 
   return (
     <section className="config-group">
-      <label>Symbol{symbol} </label>
-      <label>Timeframe{timeframe}</label>
+      <span className="bold">Symbol{symbol} </span>
+      <span className="bold">Timeframe{timeframe}</span>
 
       <DateTimeInput
         label="Start time"

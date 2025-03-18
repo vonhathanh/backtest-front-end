@@ -36,6 +36,7 @@ export default function Config() {
       },
       strategies: Object.entries(strategies),
     };
+    console.log("params ", backtestParams);
     navigate("/backtest", { state: backtestParams });
   }
 

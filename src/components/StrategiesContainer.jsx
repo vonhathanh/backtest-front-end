@@ -1,44 +1,38 @@
-import { useState, useEffect } from "react"
-import StrategyConfig from "./StrategyConfig"
-import { fetchStrategies } from "../api"
-import Loader from "./Loader"
-import ErrorMessage from "./ErrorMessage"
+import { useState, useEffect } from "react";
+import StrategyConfig from "./StrategyConfig";
+import { fetchStrategies } from "../api";
+import Loader from "./Loader";
+import ErrorMessage from "./ErrorMessage";
 
 export default function StrategiesContainer() {
+  const [strategies, setStrategies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const [strategies, setStrategies] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+  useEffect(() => {
+    fetchStrategies()
+      .then(setStrategies)
+      .catch(setError)
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
-    useEffect(() => {
-        fetchStrategies()
-            .then(setStrategies)
-            .catch(setError)
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [])
+  const strategyConfigs = strategies.map((strategy) => {
+    return <StrategyConfig key={strategy.name} name={strategy.name} params={strategy.params} />;
+  });
 
-    const strategyConfigs = strategies.map(strategy => {
-        return (
-            <StrategyConfig key={strategy.name} name={strategy.name} params={strategy.params} />
-        )
-    })
+  function render() {
+    if (loading) return <Loader />;
+    if (error != null)
+      return <ErrorMessage message={`Can't load strategies, reason: ${error.message}`} />;
+    return <section id="strategies-container">{strategyConfigs}</section>;
+  }
 
-    function render() {
-        if (loading) return <Loader />
-        if (error != null) return <ErrorMessage message={`Can't load strategies, reason: ${error.message}`} />
-        return (
-            <section id="strategies-container">
-                {strategyConfigs}
-            </section>
-        )
-    }
-
-    return (
-        <section id="strategies">
-            <label htmlFor="strategies">Strategies</label>
-            {render()}
-        </section>
-    )
+  return (
+    <section id="strategies">
+      <span className="bold">Strategies</span>
+      {render()}
+    </section>
+  );
 }

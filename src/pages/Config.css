@@ -8,7 +8,7 @@ main.config {
   min-width: 500px;
 }
 
-label {
+.bold {
   font-weight: 700;
 }
 

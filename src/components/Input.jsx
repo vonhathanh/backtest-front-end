@@ -10,9 +10,9 @@ export default function Input({ label, value, type, parent, defaultValue }) {
 
   return (
     <section>
-      <label style={style} htmlFor={label}>
+      <span className="bold" style={style}>
         {label}
-      </label>
+      </span>
       <br />
       <input
         type={type}
@@ -27,10 +27,7 @@ export default function Input({ label, value, type, parent, defaultValue }) {
                   type: "updated",
                   strategyId: parent,
                   name: toCamelCase(label),
-                  value:
-                    type === "number"
-                      ? Number(event.target.value)
-                      : event.target.value,
+                  value: type === "number" ? Number(event.target.value) : event.target.value,
                 })
             : undefined
         }

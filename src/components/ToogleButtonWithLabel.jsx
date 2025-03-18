@@ -3,7 +3,7 @@ import ToogleSwitch from "./ToogleSwitch";
 export default function ToogleButtonWithLabel({ label, name }) {
   return (
     <section className="toogle-button-with-label">
-      <label>{label}</label>
+      <span className="bold">{label}</span>
       <ToogleSwitch name={name} />
     </section>
   );
