@@ -57,8 +57,6 @@ export default function CandlestickChart({ params, price, openOrders, filledOrde
   function updateChart() {
     if (!price) return;
     series.current.update(price);
-    if (!params.stepByStep)
-      setTimeout(() => socket.emit("render_finished", {}), params.delay * 1000);
   }
 
   function drawOpenOrders() {
