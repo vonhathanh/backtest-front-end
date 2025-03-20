@@ -7,7 +7,7 @@ export default function OrderHistoryTable({ orders }) {
         <td>{order.quantity.toFixed(2)}</td>
         <td>{order.price.toFixed(2)}</td>
         <td>{order.positionSide}</td>
-        <td>{new Date(order.filledAt * 1000).toDateString()}</td>
+        <td>{new Date(order.filledAt * 1000).toJSON().slice(0, -5)}</td>
       </tr>
     );
   });
