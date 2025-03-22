@@ -17,8 +17,8 @@ main.backtest {
 
 .next-btn-div {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 50%; /* 50% of screen width */
+  transform: translateX(-50%); /* 50% of button's width */
 }
 
 .next-btn-div > button {
