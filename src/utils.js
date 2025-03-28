@@ -13,7 +13,7 @@ export function toCamelCase(str) {
 export function createPriceLineFromOrder(order) {
   return {
     price: order.price,
-    color: order.side === "BUY" ? "#00E396" : "#F72411",
+    color: order.side === "Buy" ? "#00E396" : "#F72411",
     lineWidth: 2,
     lineStyle: 2, // LineStyle.Dashed
     axisLabelVisible: false,
@@ -22,7 +22,7 @@ export function createPriceLineFromOrder(order) {
 }
 
 export function createMarkerFromOrder(order) {
-  if (order.side === "BUY") {
+  if (order.side === "Buy") {
     return {
       color: "green",
       position: "aboveBar",
