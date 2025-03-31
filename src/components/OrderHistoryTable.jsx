@@ -35,7 +35,7 @@ export default function OrderHistoryTable({ orders }) {
 
   return (
     <div ref={containerRef} className="table-container" onScroll={handleScroll}>
-      <table className="info-table">
+      <table id="order-history-table" className="info-table">
         <thead>
           <tr>
             <th>Type</th>
