@@ -1,5 +1,26 @@
+import { useState, useRef } from "react";
+import config from "../config";
+
 export default function OrderHistoryTable({ orders }) {
-  const rows = orders.map((order) => {
+  const [startIndex, setStartIndex] = useState(0);
+  const containerRef = useRef(null);
+  const ROW_HEIGHT = 28;
+  const ROWS_BUFFER = 3;
+
+  function handleScroll() {
+    if (!containerRef.current) return;
+    const top = containerRef.current.scrollTop;
+    const newStartIndex = Math.max(0, Math.floor(top / ROW_HEIGHT));
+    setStartIndex(newStartIndex);
+  }
+
+  const endIndex = Math.min(startIndex + config.visibleRows + ROWS_BUFFER, orders.length);
+  const visibleOrders = orders.slice(startIndex, endIndex);
+
+  const topSpacerHeight = startIndex * ROW_HEIGHT;
+  const bottomSpacerHeight = (orders.length - endIndex) * ROW_HEIGHT;
+
+  const rows = visibleOrders.map((order) => {
     return (
       <tr key={order.id}>
         <td>{order.type}</td>
@@ -13,8 +34,8 @@ export default function OrderHistoryTable({ orders }) {
   });
 
   return (
-    <div className="table-container">
-      <table id="order-history-table" className="info-table">
+    <div ref={containerRef} className="table-container" onScroll={handleScroll}>
+      <table className="info-table">
         <thead>
           <tr>
             <th>Type</th>
@@ -25,7 +46,19 @@ export default function OrderHistoryTable({ orders }) {
             <th>Filled at</th>
           </tr>
         </thead>
-        <tbody>{rows}</tbody>
+        <tbody>
+          {topSpacerHeight > 0 && (
+            <tr>
+              <td colSpan="3" style={{ height: `${topSpacerHeight}px` }} />
+            </tr>
+          )}
+          {rows}
+          {bottomSpacerHeight > 0 && (
+            <tr>
+              <td colSpan="3" style={{ height: `${bottomSpacerHeight}px` }} />
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );
