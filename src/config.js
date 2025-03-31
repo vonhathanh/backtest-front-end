@@ -4,6 +4,7 @@ const config = {
   maxCandlesOnPage: import.meta.env.VITE_MAX_CANDLES_ON_PAGE,
   toolTipWidth: 80,
   toolTipHeight: 80,
+  visibleRows: 7,
 };
 
 export default config;
