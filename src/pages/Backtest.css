@@ -61,16 +61,10 @@ main.backtest {
 
 .table-container {
   margin: 10px 20px 0px 20px;
-  max-height: 230px;
+  max-height: 315px;
   overflow-x: hidden;
   overflow-y: auto;
   border: 1px solid black;
-}
-
-.table-container table,
-.table-container th,
-.table-container td {
-  font-size: 0.95rem;
 }
 
 .info-table {
@@ -78,7 +72,6 @@ main.backtest {
   text-align: left;
   border: 1px solid black;
   border-spacing: 0;
-  border-collapse: separate;
 }
 
 .info-table thead {
