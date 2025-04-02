@@ -78,7 +78,7 @@ main.backtest {
   text-align: left;
   border: 1px solid black;
   border-spacing: 0;
-  border-collapse: collapse;
+  border-collapse: separate;
 }
 
 .info-table thead {
@@ -86,10 +86,13 @@ main.backtest {
   top: 0;
   z-index: 3;
   background-color: #f8f9fa;
-  border: 1px solid black;
 }
 
-.info-table th,
+.info-table th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
 .info-table td {
   border: 1px solid black;
   padding: 5px;
