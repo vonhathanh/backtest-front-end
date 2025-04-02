@@ -85,17 +85,21 @@ main.backtest {
   position: sticky;
   top: 0;
   z-index: 3;
-  background-color: #f8f9fa;
+  background-color: #2c3e50;
+  color: white;
 }
 
 .info-table th {
-  border: 1px solid black;
-  padding: 5px;
+  padding: 10px;
 }
 
 .info-table td {
-  border: 1px solid black;
-  padding: 5px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.info-table tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 #positions-table th,

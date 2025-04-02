@@ -5,9 +5,13 @@ export default function PositionsTable({ positions, price }) {
       pnl = Number(position.quantity * (price - position.averagePrice)).toFixed(2);
       if (position.side === "SHORT") pnl *= -1;
     }
+    const positionSideColor = {
+      color: position.side == "Long" ? "green" : "red",
+      fontWeight: "bold",
+    };
     return (
       <tr key={index}>
-        <td>{position.side}</td>
+        <td style={positionSideColor}>{position.side}</td>
         <td>{position.quantity.toFixed(2)}</td>
         <td>{position.averagePrice.toFixed(2)}</td>
         <td>{pnl}</td>
