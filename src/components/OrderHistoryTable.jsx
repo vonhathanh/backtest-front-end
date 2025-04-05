@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import config from "../config";
+import Order from "./Order";
 
 export default function OrderHistoryTable({ orders }) {
   const [startIndex, setStartIndex] = useState(0);
@@ -21,16 +22,7 @@ export default function OrderHistoryTable({ orders }) {
   const bottomSpacerHeight = (orders.length - endIndex) * ROW_HEIGHT;
 
   const rows = visibleOrders.map((order) => {
-    return (
-      <tr key={order.id}>
-        <td>{order.type}</td>
-        <td>{order.side}</td>
-        <td>{order.quantity.toFixed(2)}</td>
-        <td>{order.price.toFixed(2)}</td>
-        <td>{order.positionSide}</td>
-        <td>{new Date(order.filledAt * 1000).toJSON().slice(0, -5)}</td>
-      </tr>
-    );
+    return <Order key={order.id} order={order} />;
   });
 
   return (
